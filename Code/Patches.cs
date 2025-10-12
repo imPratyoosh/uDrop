@@ -1960,8 +1960,6 @@
                         "Landroid/net/Uri;->getAuthority()Ljava/lang/String;",
                         "Lj$/util/Optional;->get()Ljava/lang/Object;",
                         "Lj$/util/Optional;->isEmpty()Z",
-                        "Lj$/util/Optional;->ofNullable(Ljava/lang/Object;)Lj$/util/Optional;",
-                        "Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;",
                         ".method private final (Lcom/google/android/libraries/youtube/innertube/model/media/PlayerConfigModel;Lcom/google/android/libraries/youtube/innertube/model/media/VideoStreamingData;)"
                     ],
 
@@ -2000,9 +1998,7 @@
                                 targetSearchTerms[2],
                                 targetSearchTerms[3],
                                 targetSearchTerms[4],
-                                targetSearchTerms[5],
-                                targetSearchTerms[6],
-                                targetSearchTerms[7]
+                                targetSearchTerms[5]
                             }.All(xmlSmaliProperties.Full.PartialContains))
                         {
                             xmlSmaliProperties.ReadXMLSmaliLines();
@@ -2023,25 +2019,13 @@
                                                     {
                                                         if (xmlSmaliProperties.Lines[l].PartialContains(targetSearchTerms[5]))
                                                         {
-                                                            for (int m = l; m >= scaleIndex.Lines(l, -10); m--)
+                                                            for (int m = l; m >= 0; m--)
                                                             {
                                                                 if (xmlSmaliProperties.Lines[m].PartialContains(targetSearchTerms[6]))
                                                                 {
-                                                                    for (int n = m; n >= scaleIndex.Lines(m, -9); n--)
-                                                                    {
-                                                                        if (xmlSmaliProperties.Lines[n].PartialContains(targetSearchTerms[7]))
-                                                                        {
-                                                                            for (int o = n; o >= 0; o--)
-                                                                            {
-                                                                                if (xmlSmaliProperties.Lines[o].PartialContains(targetSearchTerms[8]))
-                                                                                {
-                                                                                    xmlSmaliProperties.ReadXMLSmaliProxiedLines(Path.GetFileNameWithoutExtension(xmlSmaliProperties.Path));
+                                                                    xmlSmaliProperties.ReadXMLSmaliProxiedLines(Path.GetFileNameWithoutExtension(xmlSmaliProperties.Path));
 
-                                                                                    infoForNextSubPatch.Add((o + 2).ToString());
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
+                                                                    infoForNextSubPatch.Add((m + 2).ToString());
                                                                 }
                                                             }
                                                         }
@@ -6281,7 +6265,7 @@
                         ".method",
                         "check-cast Ljava/nio/ByteBuffer;",
                         "invoke-static Lcom/google/protobuf/ExtensionRegistryLite;->getGeneratedRegistry()Lcom/google/protobuf/ExtensionRegistryLite;",
-                        "iget-boolean",
+                        "invoke-direct <init>",
                         "const/4 0x0",
                         "move-object ",
                         "invoke-static Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;",
@@ -6290,7 +6274,7 @@
                         "return-object",
                         "iget-object",
                         "invoke-static",
-                        ".field public final :Ljava/lang/StringBuilder;"
+                        ".method protected abstract ()Ljava/lang/StringBuilder"
                     ],
 
                     true,
@@ -6322,21 +6306,21 @@
                                             {
                                                 if (xmlSmaliProperties.Lines[k].PartialContains(targetSearchTerms[3]))
                                                 {
-                                                    for (int l = k; l <= scaleIndex.Lines(k, 5); l++)
+                                                    for (int l = k; l <= scaleIndex.Lines(k, 4); l++)
                                                     {
                                                         if (xmlSmaliProperties.Lines[l].PartialContains(targetSearchTerms[4]))
                                                         {
-                                                            string stringBuilderClassName = xmlSmaliProperties.Lines[j].GetMethodParameterClassName(2);
-
-                                                            for (int m = l; m <= scaleIndex.Lines(l, 17); m++)
+                                                            for (int m = l; m <= scaleIndex.Lines(l, 30); m++)
                                                             {
-                                                                if (xmlSmaliProperties.Lines[m].PartialContains($"{targetSearchTerms[5]} L{stringBuilderClassName};"))
+                                                                if (xmlSmaliProperties.Lines[m].PartialContains($"{targetSearchTerms[5]} {xmlSmaliProperties.Lines[j].GetMethodParameterClassName(2)}"))
                                                                 {
+                                                                    string stringBuilderClassName = xmlSmaliProperties.Lines[m].GetMethodParameterClassName(1);
+
                                                                     for (int n = m; n < xmlSmaliProperties.LinesCount; n++)
                                                                     {
                                                                         if (xmlSmaliProperties.Lines[n].PartialContains(targetSearchTerms[6]))
                                                                         {
-                                                                            for (int o = n; o <= scaleIndex.Lines(n, 20); o++)
+                                                                            for (int o = n; o <= scaleIndex.Lines(n, 11); o++)
                                                                             {
                                                                                 if (xmlSmaliProperties.Lines[o].PartialContains($"{targetSearchTerms[7]} {xmlSmaliProperties.Lines[m].GetRegister(2)}"))
                                                                                 {
@@ -6344,11 +6328,11 @@
                                                                                     {
                                                                                         if (xmlSmaliProperties.Lines[p].PartialContains(targetSearchTerms[8]))
                                                                                         {
-                                                                                            for (int q = p; q <= scaleIndex.Lines(p, 6); q++)
+                                                                                            for (int q = p; q <= scaleIndex.Lines(p, 3); q++)
                                                                                             {
                                                                                                 if (xmlSmaliProperties.Lines[q].PartialContains(targetSearchTerms[9]))
                                                                                                 {
-                                                                                                    for (int r = q; r >= scaleIndex.Lines(q, -15); r--)
+                                                                                                    for (int r = q; r >= scaleIndex.Lines(q, -10); r--)
                                                                                                     {
                                                                                                         if (xmlSmaliProperties.Lines[r].Trim().StartsWith(targetSearchTerms[10]))
                                                                                                         {
@@ -6356,15 +6340,15 @@
                                                                                                             {
                                                                                                                 if (xmlSmaliProperties.Lines[s].PartialContains(targetSearchTerms[11]))
                                                                                                                 {
-                                                                                                                    for (int t = s; t >= scaleIndex.Lines(s, -7); t--)
+                                                                                                                    for (int t = s; t >= scaleIndex.Lines(s, -4); t--)
                                                                                                                     {
                                                                                                                         if (xmlSmaliProperties.Lines[t].PartialContains(targetSearchTerms[12]))
                                                                                                                         {
-                                                                                                                            for (int u = t; u >= scaleIndex.Lines(t, -9); u--)
+                                                                                                                            for (int u = t; u >= scaleIndex.Lines(t, -5); u--)
                                                                                                                             {
                                                                                                                                 if (xmlSmaliProperties.Lines[u].PartialContains(targetSearchTerms[13]))
                                                                                                                                 {
-                                                                                                                                    string stringBuilderFieldName = "";
+                                                                                                                                    string stringBuilderGetMethodName = "";
 
                                                                                                                                     xmlSmaliProperties.ReadXMLSmaliProxiedLines(stringBuilderClassName);
 
@@ -6372,11 +6356,11 @@
                                                                                                                                     {
                                                                                                                                         if (xmlSmaliProperties.ProxiedLines[v].PartialContains(targetSearchTerms[14]))
                                                                                                                                         {
-                                                                                                                                            stringBuilderFieldName = xmlSmaliProperties.ProxiedLines[v].GetFieldName(false);
+                                                                                                                                            stringBuilderGetMethodName = xmlSmaliProperties.ProxiedLines[v].GetMethodName();
                                                                                                                                         }
                                                                                                                                     }
 
-                                                                                                                                    if (!String.IsNullOrEmpty(stringBuilderFieldName)) {
+                                                                                                                                    if (!String.IsNullOrEmpty(stringBuilderGetMethodName)) {
                                                                                                                                         string checkLithoElementFreeRegister = xmlSmaliProperties.Lines[q].GetRegister(1);
 
                                                                                                                                         codeInject.Lines(
@@ -6387,7 +6371,8 @@
 
                                                                                                                                                 [
                                                                                                                                                     $"move-object/from16 {checkLithoElementFreeRegister}, {xmlSmaliProperties.Lines[o].GetRegister(1)}",
-                                                                                                                                                    $"iget-object {checkLithoElementFreeRegister}, {checkLithoElementFreeRegister}, L{stringBuilderClassName};->{stringBuilderFieldName}:Ljava/lang/StringBuilder;",
+                                                                                                                                                    $"invoke-virtual {{{checkLithoElementFreeRegister}}}, L{stringBuilderClassName};->{stringBuilderGetMethodName}()Ljava/lang/StringBuilder;",
+                                                                                                                                                    $"move-result-object {checkLithoElementFreeRegister}",
                                                                                                                                                     $"invoke-virtual {{{checkLithoElementFreeRegister}}}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;",
                                                                                                                                                     $"move-result-object {checkLithoElementFreeRegister}",
                                                                                                                                                     $"invoke-static {{{checkLithoElementFreeRegister}}}, LuTools/uBlocker;->HideLithoTemplate(Ljava/lang/String;)Z",
@@ -6492,8 +6477,8 @@
                         "\"Component was not found because it was removed due to duplicate converter bindings.\"",
                         "invoke-static Ljava/util/Collections;->nCopies(ILjava/lang/Object;)Ljava/util/List",
                         ".method private final ;Ljava/util/List;Z)Ljava/util/List",
-                        ".field public final :Ljava/lang/StringBuilder",
-                        ".field public final :Ljava/lang/String",
+                        ".method protected abstract ()Ljava/lang/String",
+                        ".method public abstract ()Ljava/lang/String",
                         ".end method",
                         "return-object"
                     ],
@@ -6523,32 +6508,26 @@
                                     {
                                         if (xmlSmaliProperties.Lines[j].PartialContains(targetSearchTerms[3]))
                                         {
-                                            string identifierFieldClassName = xmlSmaliProperties.Lines[j].GetMethodParameterClassName(2);
-                                            string identifierFieldName = "";
+                                            string identifierGetMethodClassName = xmlSmaliProperties.Lines[j].GetMethodParameterClassName(2);
+                                            string identifierGetMethodName = "";
 
-                                            xmlSmaliProperties.ReadXMLSmaliProxiedLines(identifierFieldClassName);
+                                            xmlSmaliProperties.ReadXMLSmaliProxiedLines(identifierGetMethodClassName);
 
                                             for (int k = 0; k < xmlSmaliProperties.ProxiedLinesCount; k++)
                                             {
                                                 if (xmlSmaliProperties.ProxiedLines[k].PartialContains(targetSearchTerms[4]))
                                                 {
-                                                    for (int l = k; l <= scaleIndex.Lines(k, 5); l++)
+                                                    for (int l = k; l >= scaleIndex.ProxiedLines(k, -4); l--)
                                                     {
                                                         if (xmlSmaliProperties.ProxiedLines[l].PartialContains(targetSearchTerms[5]))
                                                         {
-                                                            if (interactionsCount < 2) {
-                                                                interactionsCount++;
-                                                            }
-                                                            else
-                                                            {
-                                                                identifierFieldName = xmlSmaliProperties.ProxiedLines[l].GetFieldName(false);
-                                                            }
+                                                            identifierGetMethodName = xmlSmaliProperties.ProxiedLines[l].GetMethodName();
                                                         }
                                                     }
                                                 }
                                             }
 
-                                            if (!String.IsNullOrEmpty(identifierFieldName))
+                                            if (!String.IsNullOrEmpty(identifierGetMethodName))
                                             {
                                                 for (int m = j; m < xmlSmaliProperties.LinesCount; m++)
                                                 {
@@ -6569,13 +6548,14 @@
 
                                                                         [
                                                                             $"move-object/from16 {freeRegister}, p2",
-                                                                            $"iget-object {freeRegister}, {freeRegister}, L{identifierFieldClassName};->{identifierFieldName}:Ljava/lang/String;",
+                                                                            $"invoke-virtual {{{freeRegister}}}, L{identifierGetMethodClassName};->{identifierGetMethodName}()Ljava/lang/String;",
+                                                                            $"move-result-object {freeRegister}",
                                                                             $"invoke-static {{{returnObjectRegister}, {freeRegister}}}, L{uBlockerPath};->HideActionButtons(Ljava/util/List;Ljava/lang/String;)V"
                                                                         ])
                                                                     ]
                                                                 ).Write();
 
-                                                                return (0, false, infoForNextSubPatch);
+                                                                return (interactionsCount, false, infoForNextSubPatch);
                                                             }
                                                         }
                                                     }
