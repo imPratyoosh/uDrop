@@ -4831,7 +4831,7 @@
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
                 ).Apply,
-                
+
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
                         SmaliUtils.GetResourceHex("id", "lottie_animation"),
@@ -4928,6 +4928,60 @@
 
                                                     [
                                                         $"const/16 {xmlSmaliProperties.Lines[j].GetRegister(1)}, 0x1"
+                                                    ])
+                                                ]
+                                            ).Write();
+
+                                            return (interactionsCount, false, infoForNextSubPatch);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        return (interactionsCount, true, infoForNextSubPatch);
+                    }
+                ).Apply,
+
+                new SmaliUtils.SubPatchModule<string[]>(
+                    [
+                        SmaliUtils.GetResourceHex(45685201),
+                        ".method )Z"
+                    ],
+
+                    true,
+
+                    (
+                        xmlSmaliProperties,
+                        targetSearchTerms,
+                        scaleIndex,
+                        codeInject,
+                        interactionsCount,
+                        infoForNextSubPatch
+                    ) => {
+                        if (new[] {
+                                targetSearchTerms[0]
+                            }.All(xmlSmaliProperties.Full.PartialContains))
+                        {
+                            xmlSmaliProperties.ReadXMLSmaliLines();
+
+                            for (int i = 0; i < xmlSmaliProperties.LinesCount; i++)
+                            {
+                                if (xmlSmaliProperties.Lines[i].PartialContains(targetSearchTerms[0]))
+                                {
+                                    for (int j = i; j >= scaleIndex.Lines(i, -9); j--)
+                                    {
+                                        if (xmlSmaliProperties.Lines[j].PartialContains(targetSearchTerms[1]))
+                                        {
+                                            codeInject.Lines(
+                                                [
+                                                    ("In-App Bold Icons",
+
+                                                    j + 2,
+
+                                                    [
+                                                        "const/16 v0, 0x1",
+                                                        "return v0"
                                                     ])
                                                 ]
                                             ).Write();
@@ -5907,7 +5961,7 @@
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
                 ).Apply,
-                
+
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
                         SmaliUtils.GetResourceHex("id", "watch_while_layout_coordinator_layout"),
@@ -6097,7 +6151,7 @@
                          return (interactionsCount, true, infoForNextSubPatch);
                      }
                  ).Apply,
-                 
+
                  new SmaliUtils.SubPatchModule<string[]>(
                     [
                         SmaliUtils.GetResourceHex(45427407),
