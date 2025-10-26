@@ -274,17 +274,6 @@ public class uBlocker {
                 "openCommentsButtonComponents"
             )
         );
-    private static final AbstractMap.SimpleEntry<AhoCorasickDoubleArrayTrie<String>, Integer> shortVideoPreviewOverflowButton =
-        InitializeNewBlockList(
-            new AbstractMap.SimpleEntry<> (
-                Set.of(
-                    "shorts",
-                    "overflow_button"
-                ),
-
-                "shortVideoPreviewOverflowButton"
-            )
-        );
     private static final AbstractMap.SimpleEntry<AhoCorasickDoubleArrayTrie<String>, Integer> sponsorShipPanelComponents =
         InitializeNewBlockList(
             new AbstractMap.SimpleEntry<> (
@@ -529,18 +518,6 @@ public class uBlocker {
                 quickQualityBottomSheet = true;
 
                 return false;
-            }
-        //---------------------------------------------------------------------------------------//
-        //------------------------------------Short Video Preview--------------------------------//
-            if (GetVideoChannelOpen()) {
-                if (SearchInSetCorasick(
-                        templateTreeComponent,
-                        shortVideoPreviewOverflowButton,
-                        uUtils.Entries.ALL
-                    )
-                ) {
-                    return true;
-                }
             }
         //---------------------------------------------------------------------------------------//
         //-------------------------------Sponsorships Panel Components---------------------------//
