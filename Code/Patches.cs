@@ -924,7 +924,7 @@
 
                 new SmaliUtils.SubPatchModule<SmaliUtils.StringTransform[]>(
                     [
-                        new("</PreferenceScreen>", "</PreferenceScreen>", $"<PreferenceCategory android:persistent=\"false\" android:layout=\"@layout/preference_group_title\" android:title=\"uTube\" android:key=\"microg_group_key\" app:iconSpaceReserved=\"false\">\n        <Preference android:icon=\"@drawable/microg_settings_key_icon\" android:title=\"MicroG\"> <intent android:targetPackage=\"{playServicesName.Transformed}.android.gms\" android:targetClass=\"org.microg.gms.ui.SettingsActivity\"/> </Preference>\n        </PreferenceCategory>\n        </PreferenceScreen>")
+                        new("        <Preference android:icon=\"@drawable/yt_outline_gear_vd_theme_24\"", "        <Preference android:icon=\"@drawable/yt_outline_gear_vd_theme_24\"", $"<Preference android:persistent=\"false\" android:layout=\"@layout/preference_with_icon\" android:title=\"MicroG\" android:key=\"@string/general_key\" app:iconSpaceReserved=\"true\"> <intent android:targetPackage=\"{playServicesName.Transformed}.android.gms\" android:targetClass=\"org.microg.gms.ui.SettingsActivity\"/> </Preference>\n        <Preference android:icon=\"@drawable/yt_outline_gear_vd_theme_24\"")
                     ],
 
                     true,
