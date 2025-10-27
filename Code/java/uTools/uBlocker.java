@@ -13,6 +13,7 @@ import static uTools.uUtils.GetNavigationBarPivot;
 import static uTools.uUtils.GetNewToast;
 import static uTools.uUtils.GetPlayerType;
 import static uTools.uUtils.GetProtoBufferComponents;
+import static uTools.uUtils.GetResourceIdentifier;
 import static uTools.uUtils.GetTopBarPivot;
 import static uTools.uUtils.GetVideoChannelOpen;
 import static uTools.uUtils.HideView;
@@ -116,6 +117,10 @@ public class uBlocker {
 
     private static String GetClassName() {
         return uBlocker.class.getSimpleName();
+    }
+
+    public static int GetNotificationFillIconHex() {
+        return GetResourceIdentifier("drawable", "utube_fill_bell_cairo_black_24");
     }
 
     private static final List<String> visibleActionButtons = List.of(

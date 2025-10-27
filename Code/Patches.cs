@@ -4945,6 +4945,88 @@
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
+                        SmaliUtils.GetResourceHex("drawable", "yt_outline_bell_cairo_black_24"),
+                        "sget-object",
+                        SmaliUtils.GetResourceHex("drawable", "yt_fill_youtube_shorts_cairo_black_24"),
+                        "sput-object :Ljava/util/EnumMap;",
+                        "invoke-virtual Ljava/util/EnumMap;->put(Ljava/lang/Enum;Ljava/lang/Object;)Ljava/lang/Object;"
+                    ],
+
+                    true,
+
+                    (
+                        xmlSmaliProperties,
+                        targetSearchTerms,
+                        scaleIndex,
+                        codeInject,
+                        interactionsCount,
+                        infoForNextSubPatch
+                    ) => {
+                        if (new[] {
+                                targetSearchTerms[0]
+                            }.All(xmlSmaliProperties.Full.PartialContains))
+                        {
+                            xmlSmaliProperties.ReadXMLSmaliLines();
+
+                            for (int i = 0; i < xmlSmaliProperties.LinesCount; i++)
+                            {
+                                if (xmlSmaliProperties.Lines[i].PartialContains(targetSearchTerms[0]))
+                                {
+                                    for (int j = i; j >= scaleIndex.Lines(i, -3); j--)
+                                    {
+                                        if (xmlSmaliProperties.Lines[j].PartialContains(targetSearchTerms[1]))
+                                        {
+                                            for (int k = j; k < xmlSmaliProperties.LinesCount; k++)
+                                            {
+                                                if (xmlSmaliProperties.Lines[k].PartialContains(targetSearchTerms[2]))
+                                                {
+                                                    for (int l = k; l <= scaleIndex.Lines(k, 20); l++)
+                                                    {
+                                                        if (xmlSmaliProperties.Lines[l].PartialContains(targetSearchTerms[3]))
+                                                        {
+                                                            for (int m = l; m >= scaleIndex.Lines(l, -3); m--)
+                                                            {
+                                                                if (xmlSmaliProperties.Lines[m].PartialContains(targetSearchTerms[4]))
+                                                                {
+                                                                    string enumRegister = xmlSmaliProperties.Lines[m].GetRegister(2);
+                                                                    string drawableResRegister = xmlSmaliProperties.Lines[m].GetRegister(3);
+
+                                                                    codeInject.Lines(
+                                                                        [
+                                                                            ("Notification Bell Fill Icon",
+
+                                                                            l,
+
+                                                                            [
+                                                                                $"sget-object {enumRegister}, {xmlSmaliProperties.Lines[j].GetInvokedSection()}",
+                                                                                $"invoke-static {{}}, L{uBlockerPath};->GetNotificationFillIconHex()I",
+                                                                                $"move-result {drawableResRegister}",
+                                                                                $"invoke-static {{{drawableResRegister}}}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;",
+                                                                                $"move-result-object {drawableResRegister}",
+                                                                                $"invoke-interface {{{xmlSmaliProperties.Lines[m].GetRegister(1)}, {enumRegister}, {drawableResRegister}}}, Ljava/util/Map;->putIfAbsent(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;"
+                                                                            ])
+                                                                        ]
+                                                                    ).Write();
+
+                                                                    return (interactionsCount, false, infoForNextSubPatch);
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        return (interactionsCount, true, infoForNextSubPatch);
+                    }
+                ).Apply,
+
+                new SmaliUtils.SubPatchModule<string[]>(
+                    [
                         SmaliUtils.GetResourceHex(45685201),
                         ".method )Z"
                     ],

@@ -1,5 +1,6 @@
 package uTools;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
@@ -207,6 +208,11 @@ public class uUtils {
     }
     public static boolean GetCommentsPanelOpen() {
         return commentsPanelOpen;
+    }
+
+    @SuppressLint("DiscouragedApi")
+    public static int GetResourceIdentifier(String type, String resourceIdentifierName) {
+        return GetAppContext().getResources().getIdentifier(resourceIdentifierName, type, GetAppContext().getPackageName());
     }
 
     private static boolean videoChannelOpen = false;
