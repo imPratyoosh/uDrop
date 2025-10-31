@@ -5368,10 +5368,10 @@
                     }
                 ).Apply,
 
-                new SmaliUtils.SubPatchModule<string[]>(
+new SmaliUtils.SubPatchModule<string[]>(
                     [
                         SmaliUtils.GetResourceHex(45694309),
-                        "move-result "
+                        ".method )Z"
                     ],
 
                     true,
@@ -5394,7 +5394,7 @@
                             {
                                 if (xmlSmaliProperties.Lines[i].PartialContains(targetSearchTerms[0]))
                                 {
-                                    for (int j = i; j <= scaleIndex.Lines(i, 11); j++)
+                                    for (int j = i; j >= scaleIndex.Lines(i, -9); j--)
                                     {
                                         if (xmlSmaliProperties.Lines[j].PartialContains(targetSearchTerms[1]))
                                         {
@@ -5402,10 +5402,11 @@
                                                 [
                                                     ("UI Transition Animations Enabler",
 
-                                                    j + 1,
+                                                    j + 2,
 
                                                     [
-                                                        $"const/16 {xmlSmaliProperties.Lines[j].GetRegister(1)}, 0x1"
+                                                        "const/16 v0, 0x1",
+                                                        "return v0"
                                                     ])
                                                 ]
                                             ).Write();
@@ -6410,7 +6411,7 @@
                         "return-object",
                         "iget-object",
                         "invoke-static",
-                        ".method protected abstract ()Ljava/lang/StringBuilder"
+                        ".field public final :Ljava/lang/StringBuilder"
                     ],
 
                     true,
@@ -6492,7 +6493,7 @@
                                                                                                                                     {
                                                                                                                                         if (xmlSmaliProperties.ProxiedLines[v].PartialContains(targetSearchTerms[14]))
                                                                                                                                         {
-                                                                                                                                            stringBuilderGetMethodName = xmlSmaliProperties.ProxiedLines[v].GetMethodName();
+                                                                                                                                            stringBuilderGetMethodName = xmlSmaliProperties.ProxiedLines[v].GetFieldName(false);
                                                                                                                                         }
                                                                                                                                     }
 
@@ -6507,8 +6508,7 @@
 
                                                                                                                                                 [
                                                                                                                                                     $"move-object/from16 {checkLithoElementFreeRegister}, {xmlSmaliProperties.Lines[o].GetRegister(1)}",
-                                                                                                                                                    $"invoke-virtual {{{checkLithoElementFreeRegister}}}, L{stringBuilderClassName};->{stringBuilderGetMethodName}()Ljava/lang/StringBuilder;",
-                                                                                                                                                    $"move-result-object {checkLithoElementFreeRegister}",
+                                                                                                                                                    $"iget-object {checkLithoElementFreeRegister}, {checkLithoElementFreeRegister}, L{stringBuilderClassName};->{stringBuilderGetMethodName}:Ljava/lang/StringBuilder;",
                                                                                                                                                     $"invoke-virtual {{{checkLithoElementFreeRegister}}}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;",
                                                                                                                                                     $"move-result-object {checkLithoElementFreeRegister}",
                                                                                                                                                     $"invoke-static {{{checkLithoElementFreeRegister}}}, LuTools/uBlocker;->HideLithoTemplate(Ljava/lang/String;)Z",
@@ -6613,8 +6613,8 @@
                         "\"Component was not found because it was removed due to duplicate converter bindings.\"",
                         "invoke-static Ljava/util/Collections;->nCopies(ILjava/lang/Object;)Ljava/util/List",
                         ".method private final ;Ljava/util/List;Z)Ljava/util/List",
-                        ".method protected abstract ()Ljava/lang/String",
-                        ".method public abstract ()Ljava/lang/String",
+                        ".field public final :Ljava/lang/StringBuilder",
+                        ".field public final :Ljava/lang/String",
                         ".end method",
                         "return-object"
                     ],
@@ -6644,26 +6644,32 @@
                                     {
                                         if (xmlSmaliProperties.Lines[j].PartialContains(targetSearchTerms[3]))
                                         {
-                                            string identifierGetMethodClassName = xmlSmaliProperties.Lines[j].GetMethodParameterClassName(2);
-                                            string identifierGetMethodName = "";
+                                            string identifierFieldClassName = xmlSmaliProperties.Lines[j].GetMethodParameterClassName(2);
+                                            string identifierFieldName = "";
 
-                                            xmlSmaliProperties.ReadXMLSmaliProxiedLines(identifierGetMethodClassName);
+                                            xmlSmaliProperties.ReadXMLSmaliProxiedLines(identifierFieldClassName);
 
                                             for (int k = 0; k < xmlSmaliProperties.ProxiedLinesCount; k++)
                                             {
                                                 if (xmlSmaliProperties.ProxiedLines[k].PartialContains(targetSearchTerms[4]))
                                                 {
-                                                    for (int l = k; l >= scaleIndex.ProxiedLines(k, -4); l--)
+                                                    for (int l = k; l <= scaleIndex.Lines(k, 5); l++)
                                                     {
                                                         if (xmlSmaliProperties.ProxiedLines[l].PartialContains(targetSearchTerms[5]))
                                                         {
-                                                            identifierGetMethodName = xmlSmaliProperties.ProxiedLines[l].GetMethodName();
+                                                            if (interactionsCount < 2) {
+                                                                interactionsCount++;
+                                                            }
+                                                            else
+                                                            {
+                                                                identifierFieldName = xmlSmaliProperties.ProxiedLines[l].GetFieldName(false);
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }
 
-                                            if (!String.IsNullOrEmpty(identifierGetMethodName))
+                                            if (!String.IsNullOrEmpty(identifierFieldName))
                                             {
                                                 for (int m = j; m < xmlSmaliProperties.LinesCount; m++)
                                                 {
@@ -6684,14 +6690,13 @@
 
                                                                         [
                                                                             $"move-object/from16 {freeRegister}, p2",
-                                                                            $"invoke-virtual {{{freeRegister}}}, L{identifierGetMethodClassName};->{identifierGetMethodName}()Ljava/lang/String;",
-                                                                            $"move-result-object {freeRegister}",
+                                                                            $"iget-object {freeRegister}, {freeRegister}, L{identifierFieldClassName};->{identifierFieldName}:Ljava/lang/String;",
                                                                             $"invoke-static {{{returnObjectRegister}, {freeRegister}}}, L{uBlockerPath};->HideActionButtons(Ljava/util/List;Ljava/lang/String;)V"
                                                                         ])
                                                                     ]
                                                                 ).Write();
 
-                                                                return (interactionsCount, false, infoForNextSubPatch);
+                                                                return (0, false, infoForNextSubPatch);
                                                             }
                                                         }
                                                     }
