@@ -1655,7 +1655,7 @@
                         ".end method"
                     ],
 
-                    true,
+                    false,
 
                     (
                         xmlSmaliProperties,
@@ -1675,23 +1675,23 @@
                             {
                                 if (xmlSmaliProperties.Lines[i].PartialContains(targetSearchTerms[1]))
                                 {
-                                    for (int j = i; j <= scaleIndex.Lines(i, 24); j++)
+                                    for (int j = i; j <= scaleIndex.Lines(i, 42); j++)
                                     {
                                         if (xmlSmaliProperties.Lines[j].PartialContains(targetSearchTerms[2]))
                                         {
-                                            for (int k = j; k <= scaleIndex.Lines(j, 9); k++)
+                                            for (int k = j; k <= scaleIndex.Lines(j, 16); k++)
                                             {
                                                 if (xmlSmaliProperties.Lines[k].PartialContains(targetSearchTerms[3]))
                                                 {
-                                                    for (int l = k; l <= scaleIndex.Lines(k, 11); l++)
+                                                    for (int l = k; l <= scaleIndex.Lines(k, 18); l++)
                                                     {
                                                         if (xmlSmaliProperties.Lines[l].PartialContains(targetSearchTerms[4]))
                                                         {
-                                                            for (int m = l; m <= scaleIndex.Lines(l, 3); m++)
+                                                            for (int m = l; m <= scaleIndex.Lines(l, 5); m++)
                                                             {
                                                                 if (xmlSmaliProperties.Lines[m].PartialContains(targetSearchTerms[5]))
                                                                 {
-                                                                    for (int n = m; n <= scaleIndex.Lines(m, 9); n++)
+                                                                    for (int n = m; n <= scaleIndex.Lines(m, 14); n++)
                                                                     {
                                                                         if (xmlSmaliProperties.Lines[n].PartialContains(targetSearchTerms[6]))
                                                                         {
@@ -1738,7 +1738,7 @@
                                                                                     ]
                                                                                 );
 
-                                                                                for (int o = n; o <= scaleIndex.Lines(n, 55); o++)
+                                                                                for (int o = n; o <= scaleIndex.Lines(n, 89); o++)
                                                                                 {
                                                                                     if (xmlSmaliProperties.Lines[o].PartialContains(targetSearchTerms[9]))
                                                                                     {
@@ -1838,19 +1838,19 @@
                             {
                                 if (xmlSmaliProperties.Lines[i].PartialContains(targetSearchTerms[4]))
                                 {
-                                    for (int j = i; j <= scaleIndex.Lines(i, 116); j++)
+                                    for (int j = i; j <= scaleIndex.Lines(i, 178); j++)
                                     {
                                         if (xmlSmaliProperties.Lines[j].PartialContains(targetSearchTerms[5]))
                                         {
-                                            for (int k = j; k >= scaleIndex.Lines(j, -10); k--)
+                                            for (int k = j; k >= scaleIndex.Lines(j, -17); k--)
                                             {
                                                 if (xmlSmaliProperties.Lines[k].PartialContains(targetSearchTerms[6]))
                                                 {
-                                                    for (int l = k; l >= scaleIndex.Lines(k, -18); l--)
+                                                    for (int l = k; l >= scaleIndex.Lines(k, -28); l--)
                                                     {
                                                         if (xmlSmaliProperties.Lines[l].PartialContains(targetSearchTerms[7]))
                                                         {
-                                                            for (int m = l; m >= scaleIndex.Lines(l, -7); m--)
+                                                            for (int m = l; m >= scaleIndex.Lines(l, -9); m--)
                                                             {
                                                                 if (xmlSmaliProperties.Lines[m].PartialContains(targetSearchTerms[8]))
                                                                 {
@@ -4916,7 +4916,7 @@
                             {
                                 if (xmlSmaliProperties.Lines[i].PartialContains(targetSearchTerms[0]))
                                 {
-                                    for (int j = i; j >= scaleIndex.Lines(i, -3); j--)
+                                    for (int j = i; j >= scaleIndex.Lines(i, -5); j--)
                                     {
                                         if (xmlSmaliProperties.Lines[j].PartialContains(targetSearchTerms[1]))
                                         {
@@ -6447,7 +6447,7 @@ new SmaliUtils.SubPatchModule<string[]>(
                                                     {
                                                         if (xmlSmaliProperties.Lines[l].PartialContains(targetSearchTerms[4]))
                                                         {
-                                                            for (int m = l; m <= scaleIndex.Lines(l, 30); m++)
+                                                            for (int m = l; m <= scaleIndex.Lines(l, 44); m++)
                                                             {
                                                                 if (xmlSmaliProperties.Lines[m].PartialContains($"{targetSearchTerms[5]} {xmlSmaliProperties.Lines[j].GetMethodParameterClassName(2)}"))
                                                                 {
@@ -6457,7 +6457,7 @@ new SmaliUtils.SubPatchModule<string[]>(
                                                                     {
                                                                         if (xmlSmaliProperties.Lines[n].PartialContains(targetSearchTerms[6]))
                                                                         {
-                                                                            for (int o = n; o <= scaleIndex.Lines(n, 11); o++)
+                                                                            for (int o = n; o <= scaleIndex.Lines(n, 20); o++)
                                                                             {
                                                                                 if (xmlSmaliProperties.Lines[o].PartialContains($"{targetSearchTerms[7]} {xmlSmaliProperties.Lines[m].GetRegister(2)}"))
                                                                                 {
@@ -6465,11 +6465,11 @@ new SmaliUtils.SubPatchModule<string[]>(
                                                                                     {
                                                                                         if (xmlSmaliProperties.Lines[p].PartialContains(targetSearchTerms[8]))
                                                                                         {
-                                                                                            for (int q = p; q <= scaleIndex.Lines(p, 3); q++)
+                                                                                            for (int q = p; q <= scaleIndex.Lines(p, 6); q++)
                                                                                             {
                                                                                                 if (xmlSmaliProperties.Lines[q].PartialContains(targetSearchTerms[9]))
                                                                                                 {
-                                                                                                    for (int r = q; r >= scaleIndex.Lines(q, -10); r--)
+                                                                                                    for (int r = q; r >= scaleIndex.Lines(q, -15); r--)
                                                                                                     {
                                                                                                         if (xmlSmaliProperties.Lines[r].Trim().StartsWith(targetSearchTerms[10]))
                                                                                                         {
@@ -6477,11 +6477,11 @@ new SmaliUtils.SubPatchModule<string[]>(
                                                                                                             {
                                                                                                                 if (xmlSmaliProperties.Lines[s].PartialContains(targetSearchTerms[11]))
                                                                                                                 {
-                                                                                                                    for (int t = s; t >= scaleIndex.Lines(s, -4); t--)
+                                                                                                                    for (int t = s; t >= scaleIndex.Lines(s, -6); t--)
                                                                                                                     {
                                                                                                                         if (xmlSmaliProperties.Lines[t].PartialContains(targetSearchTerms[12]))
                                                                                                                         {
-                                                                                                                            for (int u = t; u >= scaleIndex.Lines(t, -5); u--)
+                                                                                                                            for (int u = t; u >= scaleIndex.Lines(t, -9); u--)
                                                                                                                             {
                                                                                                                                 if (xmlSmaliProperties.Lines[u].PartialContains(targetSearchTerms[13]))
                                                                                                                                 {
