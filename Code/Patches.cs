@@ -1655,7 +1655,7 @@
                         ".end method"
                     ],
 
-                    false,
+                    true,
 
                     (
                         xmlSmaliProperties,
