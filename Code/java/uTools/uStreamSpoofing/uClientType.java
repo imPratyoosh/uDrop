@@ -6,30 +6,43 @@ import java.util.Objects;
 
 public enum uClientType {
     ANDROID_CREATOR(
-        "33",
+        "35",
         14,
         "com.google.android.apps.youtube.creator",
-        "25.40.100",
-        "143.0.7460.0",
-        "Pixel 7a",
+        "23.47.101",
+        "132.0.6779.0",
+        "Pixel 9 Pro Fold",
         "Google",
-        "TQ3A.230901.001.C3",
+        "AP3A.241005.015.A2",
         "Android",
-        "13",
+        "15",
         null
     ),
     ANDROID_VR(
         "32",
         28,
         "com.google.android.apps.youtube.vr.oculus",
-        "1.65.10",
-        "143.0.7460.0",
-        "Quest 3S",
+        "1.43.32",
+        "107.0.5284.2",
+        "Quest 3",
         "Oculus",
         "SQ3A.220605.009.A1",
         "Android",
         "12",
         null
+    ),
+    IPADOS(
+        null,
+        5,
+        null,
+        "19.22.3",
+        null,
+        "iPad7,6",
+        "Apple",
+        null,
+        "iPadOS",
+        "17.7.10.21H450",
+        "com.google.ios.youtube/19.22.3 (iPad7,6; U; CPU iPadOS 17_7_10 like Mac OS X)"
     ),
     VISIONOS(
         null,

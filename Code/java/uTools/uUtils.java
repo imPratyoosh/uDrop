@@ -3,6 +3,7 @@ package uTools;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
@@ -232,6 +233,23 @@ public class uUtils {
     }
     public static void SetAppTheme(boolean value) {
         darkTheme = value;
+    }
+
+    public static String GetAppVersion() {
+        try {
+            return GetAppContext()
+                    .getPackageManager()
+                    .getPackageInfo(GetAppContext().getPackageName(), 0)
+                    .versionName;
+        } catch (Exception e) {
+            Log.e(
+                GetClassName(),
+
+                "Cannot get the current app version name"
+            );
+        }
+
+        return "";
     }
 
     public static void HideImageView(ImageView imageView) {

@@ -44,6 +44,8 @@ public class uStreamingDataRequest {
 
                 uClientType.ANDROID_CREATOR,
 
+                uClientType.IPADOS,
+
                 uClientType.VISIONOS
             )
         );

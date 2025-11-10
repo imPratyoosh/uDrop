@@ -2,13 +2,15 @@
 
 package uTools.VideoDetails;
 
+import static uTools.uUtils.GetAppVersion;
+
 public enum uVideoDetailsClients {
     ANDROID(
         "defaultAudioTrackID,actionButtons",
         "33",
         3,
         "com.google.android.apps.youtube",
-        "20.40.41",
+        GetAppVersion(),
         "143.0.7460.0",
         "Pixel 7a",
         "Google",
