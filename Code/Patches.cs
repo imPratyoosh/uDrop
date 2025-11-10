@@ -6109,11 +6109,14 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                 new SmaliUtils.SubPatchModule<string[]>(
                      [
-                         SmaliUtils.GetResourceHex("id", "mdx_drawer_layout"),
-                         "invoke-virtual ;->finish()V",
-                         "goto ",
-                         "if-nez",
-                         "if-eqz"
+                        SmaliUtils.GetResourceHex("id", "mdx_drawer_layout"),
+                        "invoke-virtual ;->finish()V",
+                        "check-cast",
+                        "invoke-interface ()Ljava/lang/Object;",
+                        "if-eqz",
+                        "goto ",
+                        "if-nez",
+                        "if-eqz"
                      ],
 
                      true,
@@ -6140,31 +6143,57 @@ new SmaliUtils.SubPatchModule<string[]>(
                                      {
                                          if (xmlSmaliProperties.Lines[j].PartialContains(targetSearchTerms[1]))
                                          {
-                                             for (int k = j; k >= scaleIndex.Lines(j, -9); k--)
+                                             for (int k = j; k >= scaleIndex.Lines(j, -57); k--)
                                              {
                                                  if (xmlSmaliProperties.Lines[k].PartialContains(targetSearchTerms[2]))
                                                  {
-                                                     for (int l = k; l >= scaleIndex.Lines(k, -5); l--)
+                                                     for (int l = k; l >= scaleIndex.Lines(k, -9); l--)
                                                      {
                                                          if (xmlSmaliProperties.Lines[l].PartialContains(targetSearchTerms[3]))
                                                          {
-                                                             for (int m = l; m >= scaleIndex.Lines(l, -7); m--)
+                                                             for (int m = l; m >= scaleIndex.Lines(l, -5); m--)
                                                              {
                                                                  if (xmlSmaliProperties.Lines[m].PartialContains(targetSearchTerms[4]))
                                                                  {
-                                                                     codeInject.Lines(
-                                                                         [
-                                                                             ("Back Button During Video Watching Fix",
+                                                                    for (int n = j; n >= scaleIndex.Lines(j, -9); n--)
+                                                                    {
+                                                                        if (xmlSmaliProperties.Lines[n].PartialContains(targetSearchTerms[5]))
+                                                                        {
+                                                                            for (int o = n; o >= scaleIndex.Lines(n, -5); o--)
+                                                                            {
+                                                                                if (xmlSmaliProperties.Lines[o].PartialContains(targetSearchTerms[6]))
+                                                                                {
+                                                                                    for (int p = o; p >= scaleIndex.Lines(o, -7); p--)
+                                                                                    {
+                                                                                        if (xmlSmaliProperties.Lines[p].PartialContains(targetSearchTerms[7]))
+                                                                                        {
+                                                                                            codeInject.Lines(
+                                                                                                [
+                                                                                                    ("Back Button During Video Watching Fix",
 
-                                                                             m,
+                                                                                                    p,
 
-                                                                             [
-                                                                                 $"const/16 {xmlSmaliProperties.Lines[m].GetRegister(1)}, 0x0"
-                                                                             ])
-                                                                         ]
-                                                                     ).Write();
+                                                                                                    [
+                                                                                                        $"const/16 {xmlSmaliProperties.Lines[p].GetRegister(1)}, 0x0"
+                                                                                                    ]),
 
-                                                                     return (interactionsCount, false, infoForNextSubPatch);
+                                                                                                    ("Back Button During Video Watching Fix",
+
+                                                                                                    m,
+
+                                                                                                    [
+                                                                                                        $"const/16 {xmlSmaliProperties.Lines[m].GetRegister(1)}, 0x0"
+                                                                                                    ])
+                                                                                                ]
+                                                                                            ).Write();
+
+                                                                                            return (interactionsCount, false, infoForNextSubPatch);
+                                                                                         }
+                                                                                     }
+                                                                                 }
+                                                                             }
+                                                                         }
+                                                                     }
                                                                  }
                                                              }
                                                          }
