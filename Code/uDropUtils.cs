@@ -75,7 +75,7 @@ namespace uDrop.Code
 
                 methodName.StartPatchLog();
 
-                ((List<bool>)method.Invoke(null, null)!).EndPatchLog(methodName);
+                ((List<(bool, bool)>)method.Invoke(null, null)!).EndPatchLog(methodName);
             }
         }
     }

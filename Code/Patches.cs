@@ -2,15 +2,14 @@
 {
     public class YouTube
     {
-
-        private static List<bool> Debug_Patch()
+        private static List<(bool, bool)> Debug_Patch()
         {
             return [
                 
             ];
         }
 
-        private static List<bool> Debug()
+        private static List<(bool, bool)> Debug()
         {
             return [
                 new SmaliUtils.SubPatchModule<(bool, string, int)[]>(
@@ -103,7 +102,7 @@
                             return (interactionsCount, true, infoForNextSubPatch);
                         }
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
@@ -118,7 +117,7 @@
         private static readonly string uSpoofingPath =
             $"{uToolsRootFolder}/uStreamSpoofing/uSpoofing";
 
-        public static List<bool> Non_Root()
+        public static List<(bool, bool)> Non_Root()
         {
             return [
                 new SmaliUtils.SubPatchModule<SmaliUtils.StringTransform[]>(
@@ -188,7 +187,7 @@
                             return (interactionsCount, true, infoForNextSubPatch);
                         }
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<SmaliUtils.StringTransform[]>(
                     [
@@ -250,7 +249,7 @@
                             return (interactionsCount, true, infoForNextSubPatch);
                         }
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<SmaliUtils.StringTransform[]>(
                     [
@@ -289,7 +288,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<SmaliUtils.StringTransform[]>(
                     [
@@ -328,7 +327,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -381,7 +380,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<SmaliUtils.StringTransform[]>(
                     [
@@ -420,7 +419,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -464,7 +463,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -518,7 +517,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -571,7 +570,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -629,7 +628,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -684,7 +683,7 @@
                             return (interactionsCount, true, infoForNextSubPatch);
                         }
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -739,7 +738,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -795,7 +794,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -866,7 +865,7 @@
                             return (interactionsCount, true, infoForNextSubPatch);
                         }
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -920,7 +919,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<SmaliUtils.StringTransform[]>(
                     [
@@ -959,7 +958,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -1012,7 +1011,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -1066,7 +1065,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -1120,7 +1119,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -1164,7 +1163,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -1224,7 +1223,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -1278,7 +1277,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -1330,7 +1329,7 @@
                         }
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -1384,7 +1383,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -1436,7 +1435,7 @@
                         }
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -1502,7 +1501,7 @@
                         }
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -1568,7 +1567,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -1638,7 +1637,7 @@
                         }
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -1799,7 +1798,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -1895,7 +1894,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -1950,7 +1949,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -2059,11 +2058,11 @@
                             return (interactionsCount, true, infoForNextSubPatch);
                         }
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> Account_Tab_Visibility_Check()
+        public static List<(bool, bool)> Account_Tab_Visibility_Check()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -2124,7 +2123,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -2184,7 +2183,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -2284,7 +2283,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -2336,7 +2335,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -2406,7 +2405,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -2464,7 +2463,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -2514,7 +2513,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -2564,7 +2563,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
                 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -2634,11 +2633,11 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> ADBlock_Prevents_History_Fix()
+        public static List<(bool, bool)> ADBlock_Prevents_History_Fix()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -2700,11 +2699,11 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> Amoled_App_Color_Tint()
+        public static List<(bool, bool)> Amoled_App_Color_Tint()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -2762,7 +2761,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -2819,7 +2818,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -2886,7 +2885,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -2957,7 +2956,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -2999,7 +2998,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -3041,7 +3040,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -3099,11 +3098,11 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> App_Settings_Filtering()
+        public static List<(bool, bool)> App_Settings_Filtering()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -3160,7 +3159,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<SmaliUtils.StringTransform[]>(
                     [
@@ -3199,7 +3198,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<SmaliUtils.StringTransform[]>(
                     [
@@ -3238,7 +3237,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<SmaliUtils.StringTransform[]>(
                     [
@@ -3277,7 +3276,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -3321,11 +3320,11 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> Autoplay_Button_Removal()
+        public static List<(bool, bool)> Autoplay_Button_Removal()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -3377,7 +3376,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -3428,7 +3427,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -3488,11 +3487,11 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> Background_Video_Playback()
+        public static List<(bool, bool)> Background_Video_Playback()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -3555,7 +3554,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -3620,7 +3619,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -3699,11 +3698,11 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> Bottom_Floating_Button_Removal()
+        public static List<(bool, bool)> Bottom_Floating_Button_Removal()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -3793,11 +3792,11 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> Comments_Panel_Visibility_Check()
+        public static List<(bool, bool)> Comments_Panel_Visibility_Check()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -3858,7 +3857,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -3919,11 +3918,11 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
         
-        public static List<bool> Creator_Channel_Visibility_Check()
+        public static List<(bool, bool)> Creator_Channel_Visibility_Check()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -3969,7 +3968,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -4027,7 +4026,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -4092,11 +4091,11 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> Context_Set()
+        public static List<(bool, bool)> Context_Set()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -4141,7 +4140,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -4190,11 +4189,11 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> Crowdfunding_Box_Removal()
+        public static List<(bool, bool)> Crowdfunding_Box_Removal()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -4255,11 +4254,11 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
         
-        public static List<bool> Debugging_Enabler()
+        public static List<(bool, bool)> Debugging_Enabler()
         {
             return [
                 new SmaliUtils.SubPatchModule<SmaliUtils.StringTransform[]>(
@@ -4299,11 +4298,11 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> Double_Speed_Seek_Disabler()
+        public static List<(bool, bool)> Double_Speed_Seek_Disabler()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -4371,11 +4370,11 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> End_Screen_Suggested_Videos_Removal()
+        public static List<(bool, bool)> End_Screen_Suggested_Videos_Removal()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -4457,7 +4456,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -4518,7 +4517,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -4573,11 +4572,11 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> Forced_Captions_Disabler()
+        public static List<(bool, bool)> Forced_Captions_Disabler()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -4632,7 +4631,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -4686,7 +4685,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -4742,11 +4741,11 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> Generic_Improvements()
+        public static List<(bool, bool)> Generic_Improvements()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -4791,7 +4790,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<SmaliUtils.StringTransform[]>(
                     [
@@ -4830,7 +4829,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -4888,7 +4887,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -4941,7 +4940,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -5023,7 +5022,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -5077,7 +5076,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -5131,7 +5130,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -5204,7 +5203,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -5258,7 +5257,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -5312,7 +5311,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -5366,7 +5365,7 @@
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -5420,7 +5419,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -5474,7 +5473,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -5528,7 +5527,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -5581,7 +5580,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -5666,7 +5665,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -5720,7 +5719,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -5774,7 +5773,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -5828,7 +5827,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -5882,7 +5881,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -5936,7 +5935,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -5990,7 +5989,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -6043,7 +6042,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -6106,7 +6105,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                      [
@@ -6180,7 +6179,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                          return (interactionsCount, true, infoForNextSubPatch);
                      }
-                 ).Apply,
+                 ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                      [
@@ -6233,7 +6232,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                          return (interactionsCount, true, infoForNextSubPatch);
                      }
-                 ).Apply,
+                 ).SubModuleStatus,
 
                  new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -6287,11 +6286,11 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> Litho_Elements_Removal()
+        public static List<(bool, bool)> Litho_Elements_Removal()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -6345,7 +6344,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -6393,7 +6392,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -6554,7 +6553,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -6605,7 +6604,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -6710,11 +6709,11 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> Live_Chat_Elements_Removal()
+        public static List<(bool, bool)> Live_Chat_Elements_Removal()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -6776,7 +6775,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
                 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -6861,7 +6860,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -6914,7 +6913,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -6969,7 +6968,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -7022,7 +7021,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -7073,11 +7072,11 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> Load_More_Videos_Button_Removal()
+        public static List<(bool, bool)> Load_More_Videos_Button_Removal()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -7131,11 +7130,11 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> Long_Press_To_Open_Video_Channel()
+        public static List<(bool, bool)> Long_Press_To_Open_Video_Channel()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -7198,7 +7197,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
                 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -7295,11 +7294,11 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
         
-        public static List<bool> Player_Type_Set()
+        public static List<(bool, bool)> Player_Type_Set()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -7354,11 +7353,11 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
         
-        public static List<bool> Premium_Elements_Removal()
+        public static List<(bool, bool)> Premium_Elements_Removal()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -7418,7 +7417,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -7514,11 +7513,11 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (0, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> Shorts_Player_Bypasser()
+        public static List<(bool, bool)> Shorts_Player_Bypasser()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -7607,7 +7606,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                      [
@@ -7658,7 +7657,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                          return (interactionsCount, true, infoForNextSubPatch);
                      }
-                 ).Apply,
+                 ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                      [
@@ -7709,11 +7708,11 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                          return (interactionsCount, true, infoForNextSubPatch);
                      }
-                 ).Apply
+                 ).SubModuleStatus
             ];
         }
 
-        public static List<bool> Search_Trending_Suggestions_Removal()
+        public static List<(bool, bool)> Search_Trending_Suggestions_Removal()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -7795,11 +7794,11 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
         
-        public static List<bool> Start_Video_Panel_Disabler()
+        public static List<(bool, bool)> Start_Video_Panel_Disabler()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -7864,7 +7863,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -7927,11 +7926,11 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> Top_And_Navigation_Bars_Buttons_Removal()
+        public static List<(bool, bool)> Top_And_Navigation_Bars_Buttons_Removal()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -8009,7 +8008,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -8104,7 +8103,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -8164,11 +8163,11 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> Tab_Me_Account_Buttons_Filtering()
+        public static List<(bool, bool)> Tab_Me_Account_Buttons_Filtering()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -8235,7 +8234,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
                 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -8341,11 +8340,11 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> Video_ADS_Removal()
+        public static List<(bool, bool)> Video_ADS_Removal()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -8417,11 +8416,11 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> Video_Preview_Flyout_Buttons_Filtering()
+        public static List<(bool, bool)> Video_Preview_Flyout_Buttons_Filtering()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -8530,11 +8529,11 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
 
-        public static List<bool> Video_Quality()
+        public static List<(bool, bool)> Video_Quality()
         {
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
@@ -8589,7 +8588,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -8643,7 +8642,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply,
+                ).SubModuleStatus,
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
@@ -8703,7 +8702,7 @@ new SmaliUtils.SubPatchModule<string[]>(
 
                         return (interactionsCount, true, infoForNextSubPatch);
                     }
-                ).Apply
+                ).SubModuleStatus
             ];
         }
     }

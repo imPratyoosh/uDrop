@@ -19,27 +19,38 @@ namespace uDrop.Code
             $"\nApplying {patchName}...".NormalLog();
             "\n".NormalLog();
         }
-        public static void EndPatchLog(this List<bool> subPatchResults, string patchName)
+        public static void EndPatchLog(this List<(bool, bool)> subPatchResults, string patchName)
         {
             "\n".NormalLog();
 
+            List<string> disabledSubPatches =
+                [..
+                    subPatchResults
+                        .Select((disabled, index) => disabled.Item1 ? index.ToString() : "")
+                        .Where(empty => !String.IsNullOrEmpty(empty))
+                ];
             List<string> failedSubPatches =
                 [..
                     subPatchResults
-                    .Select((failed, index) => failed ? index.ToString() : "")
-                    .Where(empty => !String.IsNullOrEmpty(empty))
+                        .Select((failed, index) => failed.Item2 ? index.ToString() : "")
+                        .Where(empty => !String.IsNullOrEmpty(empty))
                 ];
 
-            int failedSubPatchesCount = failedSubPatches.Count;
-            if (failedSubPatchesCount.Equals(0))
+            if (failedSubPatches.Count.Equals(0))
             {
-                $"\n{patchName} succesfully applied".SuccessLog();
+                $"\n{
+                    patchName
+                } succesfully applied {
+                    (disabledSubPatches.Count > 0 ? $", with disabled subpatch: {{ {string.Join(", ", disabledSubPatches)} }}" : "")
+                }".SuccessLog();
             }
             else
             {
                 APKUtils.SetPatchingFailed(true);
 
-                $"\nFailed to apply {patchName}, there was an error with subpatch: {{ {string.Join(", ", failedSubPatches)} }}".ErrorLog();
+                $"\nFailed to apply {
+                    patchName
+                }, there was an error with subpatch: {{ {string.Join(", ", failedSubPatches)} }}".ErrorLog();
 
                 return;
             }

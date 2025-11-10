@@ -20,10 +20,10 @@ namespace uDrop.Code
 
         public class SubPatchModule<T>
         {
-            public bool Apply = false;
+            public (bool, bool) SubModuleStatus = (false, false);
             public SubPatchModule(
                 T smaliSearchKeys,
-                bool apply,
+                bool subModuleStatus,
                 Func<
                     XMLSmaliProperties,
                     T,
@@ -33,14 +33,13 @@ namespace uDrop.Code
                     List<string>,
                     (int, bool, List<string>) /* Returned Params */
                 > patchOperations
-            )
-            {
+            ) {
                 if (APKUtils.GetSmaliPathsCount().Equals(0) && Directory.Exists(Main_Class.apkDecompiledPath))
                 {
                     APKUtils.SetSmaliPaths();
                 }
 
-                Apply = apply;
+                SubModuleStatus = (!subModuleStatus, subModuleStatus);
                 int interactionsCount = 0;
                 List<string> infoForNextSubPatch = [];
                 (int, bool, List<string>) returnedValues;
@@ -48,7 +47,7 @@ namespace uDrop.Code
                 xmlSmaliProperties.LastOfPath = APKUtils.GetSmaliPaths().Last();
 
                 IEnumerator<string> SmaliPathsEnumerator = APKUtils.GetSmaliPaths().GetEnumerator();
-                while (Apply && SmaliPathsEnumerator.MoveNext())
+                while (SubModuleStatus.Item2 && SmaliPathsEnumerator.MoveNext())
                 {
                     xmlSmaliProperties.PatchedFull =
                         xmlSmaliProperties.Full =
@@ -65,7 +64,7 @@ namespace uDrop.Code
                                         infoForNextSubPatch
                                     );
                     interactionsCount = returnedValues.Item1;
-                    Apply = returnedValues.Item2;
+                    SubModuleStatus.Item2 = returnedValues.Item2;
                     infoForNextSubPatch = returnedValues.Item3;
                 }
             }
@@ -301,7 +300,9 @@ namespace uDrop.Code
             List<string> smaliDirs = [..
                                         Directory.GetDirectories(
                                             Main_Class.apkDecompiledPath,
+
                                             "*",
+
                                             SearchOption.TopDirectoryOnly
                                         )
                                         .Where(f => f.Contains("smali"))
@@ -342,7 +343,9 @@ namespace uDrop.Code
                 resLine = File.ReadAllLines(publicXMLPath)
                                 .First(f =>
                                     f.Contains("public") &&
+
                                     f[f.IndexOf("type=")..].Split('\"')[1].Equals(resType) &&
+
                                     f[f.IndexOf("name=")..].Split('\"')[1].Equals(resName)
                                 )
                                 .Split("id=")[1]
