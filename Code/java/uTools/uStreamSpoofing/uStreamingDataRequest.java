@@ -6,7 +6,7 @@ import static uTools.uStreamSpoofing.uPlayerRoutes.GetPlayerResponseConnectionFr
 import static uTools.uStreamSpoofing.uPlayerRoutes.requestKeys;
 import static uTools.uUtils.BackgroundThreadPool;
 import static uTools.uUtils.InitializeStreamCache;
-import static uTools.uUtils.SetCurrentActionButtonsList;
+import static uTools.uUtils.SetRemoteActionButtonsList;
 import static uTools.uUtils.SetStatsForNerdsClientName;
 
 import android.support.annotation.NonNull;
@@ -118,7 +118,7 @@ public class uStreamingDataRequest {
             )
             .GetRequestedInfo();
 
-            SetCurrentActionButtonsList((List<String>) actionButtonsRequest);
+            SetRemoteActionButtonsList((List<String>) actionButtonsRequest);
         } catch (Exception e) {
             Log.e(
                 GetClassName(),

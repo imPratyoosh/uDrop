@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/pc/Documenti/GitHub/uDrop/uDrop.csproj": {}
+    "/home/pc/Documents/GitHub/uDrop/uDrop.csproj": {}
   },
   "projects": {
-    "/home/pc/Documenti/GitHub/uDrop/uDrop.csproj": {
+    "/home/pc/Documents/GitHub/uDrop/uDrop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/pc/Documenti/GitHub/uDrop/uDrop.csproj",
+        "projectUniqueName": "/home/pc/Documents/GitHub/uDrop/uDrop.csproj",
         "projectName": "uDrop",
-        "projectPath": "/home/pc/Documenti/GitHub/uDrop/uDrop.csproj",
+        "projectPath": "/home/pc/Documents/GitHub/uDrop/uDrop.csproj",
         "packagesPath": "/home/pc/.nuget/packages/",
-        "outputPath": "/home/pc/Documenti/GitHub/uDrop/obj/",
+        "outputPath": "/home/pc/Documents/GitHub/uDrop/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/pc/.nuget/NuGet/NuGet.Config"
@@ -20,7 +20,7 @@
           "net9.0"
         ],
         "sources": {
-          "/usr/lib64/dotnet/library-packs": {},
+          "/usr/lib/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -70,7 +70,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/9.0.111/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.112/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

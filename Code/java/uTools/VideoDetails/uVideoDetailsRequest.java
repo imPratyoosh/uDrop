@@ -2,6 +2,8 @@
 
 package uTools.VideoDetails;
 
+import static uTools.uBlocker.chatActionButtonName;
+import static uTools.uBlocker.visibleActionButtons;
 import static uTools.uStreamSpoofing.uPlayerRoutes.GetPlayerResponseConnectionFromRoute;
 import static uTools.uStreamSpoofing.uPlayerRoutes.requestKeys;
 import static uTools.uUtils.BackgroundThreadPool;
@@ -164,16 +166,17 @@ public class uVideoDetailsRequest {
                                                             .getJSONObject("videoActionBarData")
                                                             .getJSONArray("buttons");
 
-                                                    List<String> finalActionButtonsList = new ArrayList<>();
+                                                    List<String> finalActionButtonsList =
+                                                        new ArrayList<>(
+                                                            List.of(visibleActionButtons.get(1))
+                                                        );
 
                                                     for (int j = 0; j < actionButtonsList.length(); j++) {
                                                         String actionButtonName = actionButtonsList.get(j).toString();
 
-                                                        if (actionButtonName.contains("yt_outline_message_bubble_overlap")) {
-                                                            continue;
+                                                        if (!actionButtonName.contains(chatActionButtonName)) {
+                                                            finalActionButtonsList.add(actionButtonName);
                                                         }
-
-                                                        finalActionButtonsList.add(actionButtonName);
                                                     }
 
                                                     return finalActionButtonsList;

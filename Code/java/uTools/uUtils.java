@@ -63,15 +63,15 @@ public class uUtils {
         return accountTabOpen;
     }
 
-    private static List<String> currentActionButtonsList;
-    public static void SetCurrentActionButtonsList(List<String> value) {
-        currentActionButtonsList = value;
+    private static List<String> remoteActionButtonsList;
+    public static void SetRemoteActionButtonsList(List<String> value) {
+        remoteActionButtonsList = value;
     }
-    public static void NullifiesCurrentActionButtonsList() {
-        currentActionButtonsList = null;
+    public static void NullifiesRemoteActionButtonsList() {
+        remoteActionButtonsList = null;
     }
-    public static List<String> GetCurrentActionButtonsList() {
-        return currentActionButtonsList;
+    public static List<String> GetRemoteActionButtonsList() {
+        return remoteActionButtonsList;
     }
 
     private static Context appContext;

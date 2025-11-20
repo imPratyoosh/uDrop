@@ -4,7 +4,6 @@ import uTools.VideoDetails.uVideoDetailsRequest;
 import static uTools.uUtils.ByteBufferContainsString;
 import static uTools.uUtils.GetAccountTabOpen;
 import static uTools.uUtils.GetCommentsPanelOpen;
-import static uTools.uUtils.GetCurrentActionButtonsList;
 import static uTools.uUtils.GetDarkTheme;
 import static uTools.uUtils.GetLithoActionDownDuration;
 import static uTools.uUtils.GetMainActivity;
@@ -13,6 +12,7 @@ import static uTools.uUtils.GetNavigationBarPivot;
 import static uTools.uUtils.GetNewToast;
 import static uTools.uUtils.GetPlayerType;
 import static uTools.uUtils.GetProtoBufferComponents;
+import static uTools.uUtils.GetRemoteActionButtonsList;
 import static uTools.uUtils.GetResourceIdentifier;
 import static uTools.uUtils.GetTopBarPivot;
 import static uTools.uUtils.GetVideoChannelOpen;
@@ -123,70 +123,64 @@ public class uBlocker {
         return GetResourceIdentifier("drawable", "utube_fill_bell_cairo_black_24");
     }
 
-    private static final List<String> visibleActionButtons = List.of(
+    public static final List<String> visibleActionButtons = List.of(
         "addToPlaylistButtonViewModel",
+        "compactifyChannelButtonViewModel",
         "segmentedLikeDislikeButtonViewModel",
         "yt_outline_share"
     );
+    public static final String chatActionButtonName = "yt_outline_message_bubble_overlap";
     public static void HideActionButtons(List<Object> list, String identifier) {
-        List<String> currentActionButtonsList = GetCurrentActionButtonsList();
+        List<String> remoteActionButtonsList = GetRemoteActionButtonsList();
         Object firstListElem = list.get(0);
 
         if (identifier != null &&
-            identifier.startsWith("video_action_bar") &&
+            identifier.startsWith("compactify_video_action_bar") &&
             list != null &&
             !list.isEmpty() &&
-            currentActionButtonsList != null &&
-            !currentActionButtonsList.isEmpty() &&
+            remoteActionButtonsList != null &&
+            !remoteActionButtonsList.isEmpty() &&
             firstListElem != null &&
             firstListElem.toString().equals("LazilyConvertedElement")
         ) {
             int listSize = list.size();
-            int currentActionButtonsListSize = currentActionButtonsList.size();
+            int remoteActionButtonsListSize = remoteActionButtonsList.size();
             int shareActionButtonIndex =
-                IntStream.range(0, currentActionButtonsListSize)
-                .filter(i -> currentActionButtonsList.get(i).contains(visibleActionButtons.get(2)))
+                IntStream.range(0, remoteActionButtonsListSize)
+                .filter(i -> remoteActionButtonsList.get(i).contains(visibleActionButtons.get(3)))
                 .findFirst()
                 .orElse(-1);
 
-            if (shareActionButtonIndex > -1) {
-                int additionalActionButtonsAmount = listSize - currentActionButtonsListSize;
+            if (shareActionButtonIndex > 0) {
+                int additionalActionButtonsAmount = listSize - remoteActionButtonsListSize;
 
-                if (additionalActionButtonsAmount < 0) {
-                    currentActionButtonsList.remove(shareActionButtonIndex);
-
-                    currentActionButtonsListSize--;
-                } else if (additionalActionButtonsAmount > 0) {
-                    shareActionButtonIndex++;
-
+                if (additionalActionButtonsAmount >= 0) {
                     for (int i = 0; i < additionalActionButtonsAmount; i++) {
-                        currentActionButtonsList.add(
-                            shareActionButtonIndex,
+                        remoteActionButtonsList.add(
+                            shareActionButtonIndex + 1,
 
                             switch (i) {
                                 case 0 -> "yt_outline_youtube_shorts_plus";
-                                case 1 -> "yt_outline_message_bubble_overlap";
-                                default -> "none";
+                                case 1 -> chatActionButtonName;
+                                default -> "button";
                             }
                         );
 
-                        currentActionButtonsListSize++;
-                    }
-                }
-
-                for (int i = listSize - 1; i >= 0; i--) {
-                    if (visibleActionButtons
-                        .stream()
-                        .anyMatch(
-                            currentActionButtonsList.get(i)
-                                ::
-                            contains
-                        )
-                    ) {
-                        continue;
+                        remoteActionButtonsListSize++;
                     }
 
-                    list.remove(i);
+                    for (int i = listSize - 1; i >= 0; i--) {
+                        if (visibleActionButtons
+                            .stream()
+                            .noneMatch(
+                                remoteActionButtonsList.get(i)
+                                    ::
+                                contains
+                            )
+                        ) {
+                            list.remove(i);
+                        }
+                    }
                 }
             }
         }
