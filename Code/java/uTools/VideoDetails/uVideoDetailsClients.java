@@ -7,16 +7,16 @@ import static uTools.uUtils.GetAppVersion;
 public enum uVideoDetailsClients {
     ANDROID(
         "defaultAudioTrackID,actionButtons",
-        "33",
+        "35",
         3,
         "com.google.android.apps.youtube",
         GetAppVersion(),
-        "143.0.7460.0",
-        "Pixel 7a",
+        "132.0.6779.0",
+        "Pixel 9 Pro Fold",
         "Google",
-        "TQ3A.230901.001.C3",
+        "AP3A.241005.015.A2",
         "Android",
-        "13",
+        "15",
         null
     ),
     WEB_REMIX(

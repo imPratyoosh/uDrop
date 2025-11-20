@@ -19,16 +19,16 @@ public enum uClientType {
         null
     ),
     ANDROID_VR(
-        "32",
+        "29",
         28,
         "com.google.android.apps.youtube.vr.oculus",
-        "1.43.32",
-        "107.0.5284.2",
+        "1.47.48",
+        "113.0.5672.24",
         "Quest 3",
         "Oculus",
-        "SQ3A.220605.009.A1",
+        "QQ3A.200805.001",
         "Android",
-        "12",
+        "10",
         null
     ),
     IPADOS(
