@@ -7399,6 +7399,76 @@ new SmaliUtils.SubPatchModule<string[]>(
                 ).SubModuleStatus
             ];
         }
+
+        public static List<(bool, bool)> Player_Restricted_Video_Confirmation_Removal()
+        {
+            return [
+                new SmaliUtils.SubPatchModule<string[]>(
+                    [
+                        "\"allowControversialContent\"",
+                        "\"allowAdultContent\"",
+                        "invoke-virtual ()Z",
+                        ".method protected final {0}()Z"
+                    ],
+
+                    true,
+
+                    (
+                        xmlSmaliProperties,
+                        targetSearchTerms,
+                        scaleIndex,
+                        codeInject,
+                        interactionsCount,
+                        infoForNextSubPatch
+                    ) => {
+                        if (new[] {
+                                targetSearchTerms[0],
+                                targetSearchTerms[1]
+                            }.All(xmlSmaliProperties.Full.PartialContains))
+                        {
+                            xmlSmaliProperties.ReadXMLSmaliLines();
+
+                            for (int i = 0; i < xmlSmaliProperties.LinesCount; i++)
+                            {
+                                if (xmlSmaliProperties.Lines[i].PartialContains(targetSearchTerms[0]))
+                                {
+                                    for (int j = i; j <= scaleIndex.Lines(i, 5); j++)
+                                    {
+                                        if (xmlSmaliProperties.Lines[j].PartialContains(targetSearchTerms[2]))
+                                        {
+                                            xmlSmaliProperties.ReadXMLSmaliProxiedLines(xmlSmaliProperties.Lines[j].GetInvokedSectionClass(1));
+
+                                            for (int k = 0; k <= xmlSmaliProperties.ProxiedLinesCount; k++)
+                                            {
+                                                if (xmlSmaliProperties.ProxiedLines[k].PartialContains(String.Format(targetSearchTerms[3], xmlSmaliProperties.Lines[j].GetMethodName())))
+                                                {
+                                                    codeInject.ProxiedLines(
+                                                        [
+                                                            ("",
+
+                                                            k + 2,
+
+                                                            [
+                                                                "const/16 v0, 0x1",
+                                                                "return v0"
+                                                            ])
+                                                        ]
+                                                    ).Write();
+
+                                                    return (interactionsCount, false, infoForNextSubPatch);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        return (interactionsCount, true, infoForNextSubPatch);
+                    }
+                ).SubModuleStatus
+            ];
+        }
         
         public static List<(bool, bool)> Player_Type_Set()
         {
