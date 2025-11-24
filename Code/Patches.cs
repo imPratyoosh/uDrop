@@ -7326,6 +7326,79 @@ new SmaliUtils.SubPatchModule<string[]>(
                 ).SubModuleStatus
             ];
         }
+
+        public static List<(bool, bool)> Player_Overlay_Timely_Shelf_Removal()
+        {
+            return [
+                new SmaliUtils.SubPatchModule<string[]>(
+                    [
+                        "\"Null startTime\"",
+                        "\"Null endTime\"",
+                        "\"Null onEnterActions\"",
+                        "\"Null onExitActions\"",
+                        "player_overlay_timely_shelf",
+                        "and-int 0x80",
+                        ".method"
+                    ],
+
+                    true,
+
+                    (
+                        xmlSmaliProperties,
+                        targetSearchTerms,
+                        scaleIndex,
+                        codeInject,
+                        interactionsCount,
+                        infoForNextSubPatch
+                    ) => {
+                        if (new[] {
+                                targetSearchTerms[0],
+                                targetSearchTerms[1],
+                                targetSearchTerms[2],
+                                targetSearchTerms[3],
+                                targetSearchTerms[4]
+                            }.All(xmlSmaliProperties.Full.PartialContains))
+                        {
+                            xmlSmaliProperties.ReadXMLSmaliLines();
+
+                            for (int i = 0; i < xmlSmaliProperties.LinesCount; i++)
+                            {
+                                if (xmlSmaliProperties.Lines[i].PartialContains(targetSearchTerms[4]))
+                                {
+                                    for (int j = i; j <= scaleIndex.Lines(i, 34); j++)
+                                    {
+                                        if (xmlSmaliProperties.Lines[j].PartialContains(targetSearchTerms[5]))
+                                        {
+                                            for (int k = j; k >= 0; k--)
+                                            {
+                                                if (xmlSmaliProperties.Lines[k].PartialContains(targetSearchTerms[6]))
+                                                {
+                                                    codeInject.Lines(
+                                                        [
+                                                            ("",
+
+                                                            k + 2,
+
+                                                            [
+                                                                "return-void"
+                                                            ])
+                                                        ]
+                                                    ).Write();
+
+                                                    return (interactionsCount, false, infoForNextSubPatch);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        return (interactionsCount, true, infoForNextSubPatch);
+                    }
+                ).SubModuleStatus
+            ];
+        }
         
         public static List<(bool, bool)> Player_Type_Set()
         {
