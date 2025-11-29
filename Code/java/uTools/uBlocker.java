@@ -9,7 +9,6 @@ import static uTools.uUtils.GetLithoActionDownDuration;
 import static uTools.uUtils.GetMainActivity;
 import static uTools.uUtils.GetNavigationBarActionDown;
 import static uTools.uUtils.GetNavigationBarPivot;
-import static uTools.uUtils.GetNewToast;
 import static uTools.uUtils.GetPlayerType;
 import static uTools.uUtils.GetProtoBufferComponents;
 import static uTools.uUtils.GetRemoteActionButtonsList;
@@ -20,6 +19,7 @@ import static uTools.uUtils.HideView;
 import static uTools.uUtils.HideViewGroupByLayoutParams;
 import static uTools.uUtils.HideViewGroupByMarginLayout;
 import static uTools.uUtils.InitializeNewBlockList;
+import static uTools.uUtils.MakeToast;
 import static uTools.uUtils.SearchInSetCorasick;
 import static uTools.uUtils.SetAccountTabOpen;
 import static uTools.uUtils.SetNavigationBarActionDown;
@@ -34,7 +34,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-import android.widget.Toast;
 
 import com.hankcs.algorithm.AhoCorasickDoubleArrayTrie;
 
@@ -87,8 +86,8 @@ public class uBlocker {
         }
     }
 
-    private static final Toast checkMicroGPackageToastError =
-        GetNewToast("Error: No MicroG Installed");
+    private static final MakeToast checkMicroGPackageToast =
+        new MakeToast("Error: No MicroG Installed");
     public static void CheckMicroGPackage(Activity activity) {
         try {
             activity
@@ -99,7 +98,7 @@ public class uBlocker {
                 PackageManager.GET_ACTIVITIES
             );
         } catch (PackageManager.NameNotFoundException exception) {
-            checkMicroGPackageToastError.show();
+            checkMicroGPackageToast.ShowToast();
         }
     }
 
@@ -674,19 +673,19 @@ public class uBlocker {
         }
     }
 
-    private static final Toast openVideoChannelToastInProgress =
-        GetNewToast("Opening video channel...");
-    private static final Toast openVideoChannelToastDone =
-        GetNewToast("Channel opened");
-    private static final Toast openVideoChannelToastError =
-        GetNewToast("Error: Failed to open video channel");
+    private static final MakeToast openVideoChannelToastInProgress =
+        new MakeToast("Opening video channel...");
+    private static final MakeToast openVideoChannelToastDone =
+        new MakeToast("Channel opened");
+    private static final MakeToast openVideoChannelToastError =
+        new MakeToast("Error: Failed to open video channel");
     private static Thread openVideoChannelThread = null;
     public static boolean OpenVideoChannel(String videoID) {
         if (openVideoChannelThread == null) {
             if (!GetCommentsPanelOpen() && GetLithoActionDownDuration() >= 1000) {
                 openVideoChannelThread = new Thread(() -> {
                     try {
-                        openVideoChannelToastInProgress.show();
+                        openVideoChannelToastInProgress.ShowToast();
 
                         Context context = GetMainActivity();
 
@@ -725,11 +724,11 @@ public class uBlocker {
 
                             context.startActivity(openLiveChannelIntent);
 
-                            openVideoChannelToastInProgress.cancel();
-                            openVideoChannelToastDone.show();
+                            openVideoChannelToastInProgress.HideToast();
+                            openVideoChannelToastDone.ShowToast();
                         }
                     } catch (Exception e) {
-                        openVideoChannelToastError.show();
+                        openVideoChannelToastError.ShowToast();
                     }
 
                     openVideoChannelThread.interrupt();

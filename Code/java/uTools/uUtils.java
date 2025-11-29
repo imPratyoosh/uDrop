@@ -3,10 +3,8 @@ package uTools;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,7 +28,6 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.Stack;
 import java.util.concurrent.SynchronousQueue;
@@ -50,6 +47,34 @@ public class uUtils {
     }
 
     enum EnumInitialization { NONE }
+
+    public static class MakeToast {
+        private Toast toastObj;
+        private final String message;
+        private final Handler handlerObj = new Handler(Looper.getMainLooper());
+
+        public MakeToast(String message) {
+            this.message = message;
+        }
+
+        public void ShowToast() {
+            this.handlerObj.post(() -> {
+                if (this.toastObj == null) {
+                    this.toastObj = Toast.makeText(GetAppContext(), this.message, Toast.LENGTH_LONG);
+                }
+
+                this.toastObj.show();
+            });
+        }
+
+        public void HideToast() {
+            this.handlerObj.post(() -> {
+                if (this.toastObj != null) {
+                    this.toastObj.cancel();
+                }
+            });
+        }
+    }
 
 
 
@@ -436,12 +461,6 @@ public class uUtils {
         }
 
         return GetNavigationBarDelayFinished();
-    }
-
-    public static Toast GetNewToast(@NonNull String messageToToast) {
-        Objects.requireNonNull(messageToToast);
-
-        return Toast.makeText(GetAppContext(), messageToToast, Toast.LENGTH_LONG);
     }
 
     private static Enum<?> playerType = EnumInitialization.NONE;
