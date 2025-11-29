@@ -296,7 +296,7 @@ public class uBlocker {
         );
     private static final Set<String> videoLookupComponentsFirst =
         Set.of(
-            "tvfilm_attachment"
+            "/tvfilm/"
         );
     private static final AbstractMap.SimpleEntry<AhoCorasickDoubleArrayTrie<String>, Integer> videoLookupComponentsSecond =
         InitializeNewBlockList(
