@@ -236,6 +236,8 @@ public class uBlocker {
         );
     private static final Set<String> commentsComponentsSecond =
         Set.of(
+            "yt_outline_experimental_bookmark",
+            "yt_outline_experimental_flag",
             "yt_outline_bookmark",
             "yt_outline_flag"
         );
