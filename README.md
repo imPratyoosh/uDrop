@@ -16,7 +16,8 @@ In the end, ```uDrop``` doesn't want to compete with ReVanced (it wouldn't be po
 1) Before using the modded YouTube client, make sure to install MicroG from the [ReVanced Team repository](https://github.com/ReVanced/GmsCore/releases).
    This is the only version of MicroG which I have personally tested and that doesn't cause any problem related to poor performance or battery drain (at least on my devices). 
 
-2) This project was originally designed to remain private, and has therefore has always remained without documentation... uDrop will likely never get documentation, because my free time only allows me to work on the mods code.
+2) This project was originally designed to remain private, and has therefore has always remained without documentation...  
+   uDrop will likely never get documentation, because my free time only allows me to work on the mods code.
 
 ## Collaboration 🤝
 
