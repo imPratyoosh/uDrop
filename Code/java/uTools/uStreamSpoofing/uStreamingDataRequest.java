@@ -2,14 +2,19 @@
 
 package uTools.uStreamSpoofing;
 
+import static uTools.uBlocker.playerMaximized;
 import static uTools.uStreamSpoofing.uPlayerRoutes.GetPlayerResponseConnectionFromRoute;
 import static uTools.uStreamSpoofing.uPlayerRoutes.requestKeys;
 import static uTools.uUtils.BackgroundThreadPool;
+import static uTools.uUtils.GetPlayerType;
+import static uTools.uUtils.GetVideoPlaybackStatus;
 import static uTools.uUtils.InitializeStreamCache;
+import static uTools.uUtils.SearchInSetCorasick;
 import static uTools.uUtils.SetRemoteActionButtonsList;
 import static uTools.uUtils.SetStatsForNerdsClientName;
 
-import android.support.annotation.NonNull;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -32,11 +37,16 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 import uTools.VideoDetails.uVideoDetailsRequest;
+import uTools.uUtils;
 
 @SuppressWarnings({
+    "DiscourageApi",
     "unchecked"
 })
 public class uStreamingDataRequest {
+    private static String videoIDToReload = "";
+    private static String videoIDPlaying = "";
+
     private final List<uClientType> CLIENT_TYPES_ORDER_TO_USE =
         new ArrayList<>(
             Arrays.asList(
@@ -53,13 +63,10 @@ public class uStreamingDataRequest {
     private final List<Locale> defaultAudioTrackLocales = new ArrayList<>();
     private final Future<ByteBuffer> future;
     private byte[] requestBody;
-    private final String videoID;
     private boolean videoRequireLogin;
     private boolean videoRequireSimplifiedLocale;
     private uStreamingDataRequest(String videoID, Map<String, String> playerHeaders) {
         Objects.requireNonNull(playerHeaders);
-
-        this.videoID = videoID;
 
         try {
             defaultAudioTrackLocales.clear();
@@ -70,9 +77,7 @@ public class uStreamingDataRequest {
                 "defaultAudioTrackID"
             )
             .GetRequestedInfo();
-
             String defaultAudioTrackName = (String) defaultAudioTrackNameRequest;
-
             String hyphen = "-";
 
             if (defaultAudioTrackName.contains(hyphen)) {
@@ -209,44 +214,49 @@ public class uStreamingDataRequest {
                                 connection.setFixedLengthStreamingMode(requestBody.length);
                                 connection.getOutputStream().write(requestBody);
 
-                                if (connection.getResponseCode() == 200 && connection.getContentLength() != 0) {
-                                    try (
-                                        InputStream inputStream = new BufferedInputStream(connection.getInputStream());
-                                        ByteArrayOutputStream bAOS = new ByteArrayOutputStream()
-                                    ) {
-                                        byte[] buffer = new byte[2048];
-                                        int bytesRead;
+                                if (connection.getResponseCode() == 200 &&
+                                    connection.getContentLength() != 0) {
+                                        try (
+                                            InputStream inputStream = new BufferedInputStream(connection.getInputStream());
+                                            ByteArrayOutputStream bAOS = new ByteArrayOutputStream()
+                                        ) {
+                                            byte[] buffer = new byte[2048];
+                                            int bytesRead;
 
-                                        while ((bytesRead = inputStream.read(buffer)) >= 0) {
-                                            bAOS.write(buffer, 0, bytesRead);
-                                        }
+                                            while ((bytesRead = inputStream.read(buffer)) >= 0) {
+                                                bAOS.write(buffer, 0, bytesRead);
+                                            }
 
-                                        currentClientName =
-                                            String.format(
-                                                " (%s - %s)",
+                                            currentClientName =
+                                                String.format(
+                                                    " (%s - %s)",
 
-                                                clientType.name(),
-                                                !videoRequireLogin ? "NO_AUTH" : "WITH_AUTH"
+                                                    clientType.name(),
+                                                    !videoRequireLogin ? "NO_AUTH" : "WITH_AUTH"
+                                                );
+
+                                            SetStatsForNerdsClientName(currentClientName);
+                                            Log.d(GetClassName(), currentClientName);
+
+                                            videoIDPlaying = videoID;
+
+                                            VideoReload();
+
+                                            return ByteBuffer.wrap(bAOS.toByteArray());
+                                        } catch (Exception e) {
+                                            Log.e(
+                                                GetClassName(),
+
+                                                e.toString()
                                             );
-
-                                        SetStatsForNerdsClientName(currentClientName);
-                                        Log.d(GetClassName(), currentClientName);
-
-                                        return ByteBuffer.wrap(bAOS.toByteArray());
-                                    } catch (Exception e) {
-                                        Log.e(
-                                            GetClassName(),
-
-                                            e.toString()
-                                        );
-                                    }
+                                        }
                                 }
                             }
 
                             videoRequireSimplifiedLocale = true;
                         }
 
-                        videoRequireLogin = !videoRequireLogin;
+                        videoRequireLogin = true;
                     }
                 }
 
@@ -290,13 +300,52 @@ public class uStreamingDataRequest {
         return null;
     }
 
-    @NonNull
-    @Override
-    public String toString() {
-        return String.format(
-            "StreamingDataRequest{videoId='%s'}",
+    private static final uUtils.MakeToast videoReloadingToast =
+        new uUtils.MakeToast("Timeout: Reloading video...");
+    private void VideoReload() {
+        videoIDToReload = videoIDPlaying;
 
-            videoID
+        Handler videoReloadHandler = new Handler(Looper.getMainLooper());
+        videoReloadHandler.post(
+            new Runnable() {
+                final Handler runnableHandler = videoReloadHandler;
+                int msTimeCounter = 0;
+
+                @Override
+                public void run() {
+                    if (Objects.equals(videoIDToReload, videoIDPlaying)
+                            &&
+                        !Objects.requireNonNull(GetVideoPlaybackStatus()).name().equals("VIDEO_PLAYING")
+                    ) {
+                        if (msTimeCounter >= 7000) {
+                            if (SearchInSetCorasick(
+                                    Objects.requireNonNull(GetPlayerType()).name(),
+                                    playerMaximized,
+                                    uUtils.Entries.ANY
+                                )
+                            ) {
+                                videoReloadingToast.ShowToast();
+
+                                uUtils.DismissVideoPlayer();
+
+                                uUtils.OpenNewVideo(videoIDToReload);
+
+                                terminate();
+                            }
+                        } else {
+                            msTimeCounter += 100;
+
+                            runnableHandler.postDelayed(this, 100);
+                        }
+                    } else {
+                        terminate();
+                    }
+                }
+
+                private void terminate() {
+                    this.runnableHandler.removeCallbacks(this);
+                }
+            }
         );
     }
 }

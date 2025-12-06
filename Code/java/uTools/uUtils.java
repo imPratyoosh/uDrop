@@ -1,8 +1,9 @@
 package uTools;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -35,7 +36,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-@SuppressWarnings({"ConstantConditions", "SameParameterValue"})
+@SuppressWarnings({"ConstantConditions", "DiscouragedApi", "SameParameterValue"})
 public class uUtils {
     private static String GetClassName() {
         return uUtils.class.getSimpleName();
@@ -236,10 +237,11 @@ public class uUtils {
         return commentsPanelOpen;
     }
 
-    @SuppressLint("DiscouragedApi")
     public static int GetResourceIdentifier(String type, String resourceIdentifierName) {
         return GetAppContext().getResources().getIdentifier(resourceIdentifierName, type, GetAppContext().getPackageName());
     }
+
+    public static void DismissVideoPlayer() {}
 
     private static boolean videoChannelOpen = false;
     public static void SetVideoChannelOpen(boolean value) {
@@ -445,7 +447,6 @@ public class uUtils {
         return navigationBarPivot;
     }
 
-    private static final Handler handler = new Handler(Looper.getMainLooper());
     private static boolean navigationBarDelayFinished = true;
     public static void SetNavigationBarDelayFinished(boolean value) {
         navigationBarDelayFinished = value;
@@ -453,14 +454,43 @@ public class uUtils {
     public static boolean GetNavigationBarDelayFinished() {
         return navigationBarDelayFinished;
     }
+    private static final Handler navigationBarDelayHandler = new Handler(Looper.getMainLooper());
     public static boolean StartNavigationBarDelayTimer() {
         if (GetNavigationBarDelayFinished()) {
-            handler.postDelayed(() -> {
+            navigationBarDelayHandler.postDelayed(() -> {
                 SetNavigationBarDelayFinished(true);
             }, 300);
         }
 
         return GetNavigationBarDelayFinished();
+    }
+
+    public static void OpenNewVideo(String videoID) {
+        try {
+            Context context = GetMainActivity();
+
+            Intent videoPlayerIntent = new Intent(
+                Intent.ACTION_VIEW,
+
+                Uri.parse(
+                    String.format(
+                        "https://www.youtube.com/watch?v=%s",
+
+                        videoID
+                    )
+                )
+            );
+            videoPlayerIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            videoPlayerIntent.setPackage(context.getPackageName());
+
+            context.startActivity(videoPlayerIntent);
+        } catch (Exception e) {
+            Log.e(
+                GetClassName(),
+
+                e.toString()
+            );
+        }
     }
 
     private static Enum<?> playerType = EnumInitialization.NONE;
@@ -523,5 +553,13 @@ public class uUtils {
     }
     public static Enum<?> GetTopBarPivot() {
         return topBarPivot;
+    }
+
+    private static Enum<?> videoPlaybackStatus = EnumInitialization.NONE;
+    public static void SetVideoPlaybackStatus(Enum<?> value) {
+        videoPlaybackStatus = value;
+    }
+    public static Enum<?> GetVideoPlaybackStatus() {
+        return videoPlaybackStatus;
     }
 }

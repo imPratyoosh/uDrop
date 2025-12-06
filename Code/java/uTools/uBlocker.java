@@ -209,7 +209,7 @@ public class uBlocker {
     }
 
 
-    private static final AbstractMap.SimpleEntry<AhoCorasickDoubleArrayTrie<String>, Integer> playerMaximized =
+    public static final AbstractMap.SimpleEntry<AhoCorasickDoubleArrayTrie<String>, Integer> playerMaximized =
         InitializeNewBlockList(
             new AbstractMap.SimpleEntry<> (
                 Set.of(
@@ -767,37 +767,5 @@ public class uBlocker {
 
     public static Uri OverrideTrackingUrl(Uri trackingUrl) {
         return trackingUrl.buildUpon().authority("www.youtube.com").build();
-    }
-
-    public static boolean ShortsPlayerBypassing(String shortsVideoID) {
-        try {
-            Context context = GetMainActivity();
-
-            Intent videoPlayerIntent = new Intent(
-                Intent.ACTION_VIEW,
-
-                Uri.parse(
-                    String.format(
-                        "https://www.youtube.com/watch?v=%s",
-
-                        shortsVideoID
-                    )
-                )
-            );
-            videoPlayerIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            videoPlayerIntent.setPackage(context.getPackageName());
-
-            context.startActivity(videoPlayerIntent);
-
-            return true;
-        } catch (Exception e) {
-            Log.e(
-                GetClassName(),
-
-                e.toString()
-            );
-        }
-
-        return false;
     }
 }

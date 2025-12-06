@@ -49,12 +49,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="APKIntegrations\**\*">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Libs\**\*">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="APKIntegrations\**\*.*"
+             CopyToOutputDirectory="PreserveNewest"
+             Link="APKIntegrations\%(RecursiveDir)%(FileName)%(Extension)"/>
+
+    <Content Include="Libs\**\*.*"
+             CopyToOutputDirectory="PreserveNewest"
+             Link="Libs\%(RecursiveDir)%(FileName)%(Extension)"/>
   </ItemGroup>
 
 </Project>

@@ -2022,7 +2022,7 @@
                                                             {
                                                                 if (xmlSmaliProperties.Lines[m].PartialContains(targetSearchTerms[6]))
                                                                 {
-                                                                    xmlSmaliProperties.ReadXMLSmaliProxiedLines(Path.GetFileNameWithoutExtension(xmlSmaliProperties.Path));
+                                                                    xmlSmaliProperties.ReadXMLSmaliProxiedLines(xmlSmaliProperties.Path);
 
                                                                     infoForNextSubPatch.Add((m + 2).ToString());
                                                                 }
@@ -2915,7 +2915,7 @@
                             for (int i = 0; i < xmlSmaliProperties.LinesCount; i++)
                             {
                                 if (xmlSmaliProperties.Lines[i].PartialContains(targetSearchTerms[0]) &&
-                                    xmlSmaliProperties.Lines[i].MethodParametersCount(2))
+                                    xmlSmaliProperties.Lines[i].GetMethodParametersCount() == 2)
                                 {
                                     for (int j = i; j < xmlSmaliProperties.LinesCount; j++)
                                     {
@@ -7469,10 +7469,63 @@ new SmaliUtils.SubPatchModule<string[]>(
                 ).SubModuleStatus
             ];
         }
-        
-        public static List<(bool, bool)> Player_Type_Set()
+
+        public static List<(bool, bool)> Playback_Properties_Set()
         {
             return [
+                new SmaliUtils.SubPatchModule<string[]>(
+                    [
+                        "\"NEW\"",
+                        "\"PLAYBACK_PENDING\"",
+                        "\"PLAYBACK_LOADED\"",
+                        "\"VIDEO_PLAYING\"",
+                        ".method public final varargs ([ ;)Z"
+                    ],
+
+                    true,
+
+                    (
+                        xmlSmaliProperties,
+                        targetSearchTerms,
+                        scaleIndex,
+                        codeInject,
+                        interactionsCount,
+                        infoForNextSubPatch
+                    ) => {
+                        if (new[] {
+                                targetSearchTerms[0],
+                                targetSearchTerms[1],
+                                targetSearchTerms[2],
+                                targetSearchTerms[3]
+                            }.All(xmlSmaliProperties.Full.PartialContains))
+                        {
+                            xmlSmaliProperties.ReadXMLSmaliLines();
+
+                            for (int i = 0; i < xmlSmaliProperties.LinesCount; i++)
+                            {
+                                if (xmlSmaliProperties.Lines[i].PartialContains(targetSearchTerms[4]))
+                                {
+                                    codeInject.Lines(
+                                        [
+                                            ("Status",
+
+                                            i + 2,
+
+                                            [
+                                                $"invoke-static {{p0}}, L{uUtilsPath};->SetVideoPlaybackStatus(Ljava/lang/Enum;)V"
+                                            ])
+                                        ]
+                                    ).Write();
+
+                                    return (interactionsCount, false, infoForNextSubPatch);
+                                }
+                            }
+                        }
+
+                        return (interactionsCount, true, infoForNextSubPatch);
+                    }
+                ).SubModuleStatus,
+
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
                         "\"NONE\"",
@@ -7508,7 +7561,7 @@ new SmaliUtils.SubPatchModule<string[]>(
                                 {
                                     codeInject.ProxiedLines(
                                         [
-                                            ("",
+                                            ("Type",
 
                                             i + 2,
 
@@ -7754,11 +7807,8 @@ new SmaliUtils.SubPatchModule<string[]>(
                                                                             [
                                                                                 $"invoke-virtual/range {{p1 .. p1}}, Lcom/google/android/libraries/youtube/player/model/PlaybackStartDescriptor;->{xmlSmaliProperties.ProxiedLines[m].GetMethodName()}()Ljava/lang/String;",
                                                                                 "move-result-object v0",
-                                                                                $"invoke-static {{v0}}, L{uBlockerPath};->ShortsPlayerBypassing(Ljava/lang/String;)Z",
-                                                                                "move-result v0",
-                                                                                "if-eqz v0, :shorts_player_bypassing",
+                                                                                $"invoke-static {{v0}}, L{uUtilsPath};->OpenNewVideo(Ljava/lang/String;)V",
                                                                                 "return-void",
-                                                                                ":shorts_player_bypassing"
                                                                             ])
                                                                         ]
                                                                     ).Write();
@@ -8869,6 +8919,175 @@ new SmaliUtils.SubPatchModule<string[]>(
                                         }
                                     }
                                 }
+                            }
+                        }
+
+                        return (interactionsCount, true, infoForNextSubPatch);
+                    }
+                ).SubModuleStatus
+            ];
+        }
+
+        public static List<(bool, bool)> Video_Reload_After_Timeout()
+        {
+            return [
+                new SmaliUtils.SubPatchModule<string[]>(
+                    [
+                        SmaliUtils.GetResourceHex(257),
+                        SmaliUtils.GetResourceHex(226205),
+                        ".method public final (Landroid/view/MotionEvent;FF)V",
+                        "invoke-static Ljava/lang/Math;->hypot(DD)D",
+                        "invoke-virtual ()V",
+                        ".method public constructor <init>",
+                        "invoke-direct Ljava/lang/Object;-><init>()V",
+                        ".method public static DismissVideoPlayer()V",
+                        ".locals 0"
+                    ],
+
+                    true,
+
+                    (
+                        xmlSmaliProperties,
+                        targetSearchTerms,
+                        scaleIndex,
+                        codeInject,
+                        interactionsCount,
+                        infoForNextSubPatch
+                    ) => {
+                        if (interactionsCount < 2)
+                        {
+                            if (new[] {
+                                    targetSearchTerms[0],
+                                    targetSearchTerms[1]
+                                }.All(xmlSmaliProperties.Full.PartialContains))
+                            {
+                                xmlSmaliProperties.ReadXMLSmaliLines();
+
+                                for (int i = 0; i < xmlSmaliProperties.LinesCount; i++)
+                                {
+                                    if (xmlSmaliProperties.Lines[i].PartialContains(targetSearchTerms[2]))
+                                    {
+                                        for (int j = i; j <= scaleIndex.Lines(i, 381); j++)
+                                        {
+                                            if (xmlSmaliProperties.Lines[j].PartialContains(targetSearchTerms[3]))
+                                            {
+                                                for (int k = j; k >= scaleIndex.Lines(j, -14); k--)
+                                                {
+                                                    if (xmlSmaliProperties.Lines[k].PartialContains(targetSearchTerms[4]))
+                                                    {
+                                                        infoForNextSubPatch.Add("firstSmaliInfo");
+                                                        infoForNextSubPatch.Add(xmlSmaliProperties.Lines[k].GetInvokedSectionClass(1));
+                                                        infoForNextSubPatch.Add(xmlSmaliProperties.Lines[k].GetMethodName());
+
+                                                        interactionsCount++;
+
+                                                        return (interactionsCount, true, infoForNextSubPatch);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+
+                            if (xmlSmaliProperties.Full.GetOccurrenceCount("Landroid/view/View;->setOnClickListener") == 2 &&
+                                xmlSmaliProperties.Full.GetOccurrenceCount("0x") == 3)
+                            {
+                                xmlSmaliProperties.ReadXMLSmaliLines();
+
+                                for (int i = 0; i < xmlSmaliProperties.LinesCount; i++)
+                                {
+                                    if (xmlSmaliProperties.Lines[i].PartialContains(targetSearchTerms[5]) &&
+                                        xmlSmaliProperties.Lines[i].GetMethodParametersCount() == 26)
+                                    {
+                                        for (int j = i; j <= scaleIndex.Lines(i, 5); j++)
+                                        {
+                                            if (xmlSmaliProperties.Lines[j].PartialContains(targetSearchTerms[6]))
+                                            {
+                                                infoForNextSubPatch.Add("secondSmaliInfo");
+                                                infoForNextSubPatch.Add((j + 1).ToString());
+                                                infoForNextSubPatch.Add(xmlSmaliProperties.Path);
+
+                                                interactionsCount++;
+
+                                                return (interactionsCount, true, infoForNextSubPatch);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            int firstSmaliInfoIndex = infoForNextSubPatch.IndexOf("firstSmaliInfo");
+                            int secondSmaliInfoIndex = infoForNextSubPatch.IndexOf("secondSmaliInfo");
+
+                            string dismissVideoPlayerClassFieldName = "dismissVideoPlayerClass";
+                            string dismissVideoPlayerClass = infoForNextSubPatch[firstSmaliInfoIndex + 1];
+                            
+                            xmlSmaliProperties.ReadXMLSmaliProxiedLines(uUtilsPath);
+
+                            for (int i = 0; i < xmlSmaliProperties.ProxiedLinesCount; i++)
+                            {
+                                if (xmlSmaliProperties.ProxiedLines[i].PartialContains(targetSearchTerms[7]))
+                                {
+                                    int registersAmountIndex = i + 1;
+
+                                    if (xmlSmaliProperties.ProxiedLines[registersAmountIndex].PartialContains(targetSearchTerms[8]))
+                                    {
+                                        codeInject.ProxiedLinesReplace(
+                                            [
+                                                ("",
+
+                                                registersAmountIndex,
+
+                                                [
+                                                    ".locals 1",
+                                                    $"sget-object v0, L{uUtilsPath};->{dismissVideoPlayerClassFieldName}:L{dismissVideoPlayerClass};",
+                                                    "if-eqz v0, :dismiss_video_player",
+                                                    $"invoke-virtual {{v0}}, L{dismissVideoPlayerClass};->{infoForNextSubPatch[firstSmaliInfoIndex + 2]}()V",
+                                                    ":dismiss_video_player",
+                                                    "return-void"
+                                                ])
+                                            ]
+                                        ).Write();
+                                    }
+
+                                    codeInject.ProxiedLines(
+                                        [
+                                            ("",
+
+                                            i,
+
+                                            [
+                                                $".field public static {dismissVideoPlayerClassFieldName}:L{dismissVideoPlayerClass};"
+                                            ])
+                                        ]
+                                    ).Write();
+
+                                    interactionsCount++;
+
+                                    break;
+                                }
+                            }
+
+                            if (interactionsCount == 3) {
+                                xmlSmaliProperties.ReadXMLSmaliProxiedLines(infoForNextSubPatch[secondSmaliInfoIndex + 2]);
+
+                                codeInject.ProxiedLines(
+                                    [
+                                        ("",
+
+                                        int.Parse(infoForNextSubPatch[secondSmaliInfoIndex + 1]),
+
+                                        [
+                                            $"sput-object p3, L{uUtilsPath};->{dismissVideoPlayerClassFieldName}:L{dismissVideoPlayerClass};"
+                                        ])
+                                    ]
+                                ).Write();
+
+                                return (0, false, []);
                             }
                         }
 

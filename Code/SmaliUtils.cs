@@ -1,6 +1,6 @@
-﻿using System.Text;
+﻿using IOPath = System.IO.Path;
+using System.Text;
 using System.Text.RegularExpressions;
-using HtmlAgilityPack;
 
 namespace uDrop.Code
 {
@@ -91,8 +91,31 @@ namespace uDrop.Code
 
                 public void ReadXMLSmaliProxiedLines(string partialPath)
                 {
+                    string smaliExtension = ".smali";
+                    if (!partialPath.Contains(smaliExtension))
+                    {
+                        partialPath += smaliExtension;
+                    }
+
+                    string directorySeparatorChar = IOPath.DirectorySeparatorChar.ToString();
+                    if (!partialPath.Contains(directorySeparatorChar))
+                    {
+                        partialPath = $"{directorySeparatorChar}{partialPath}";
+                    }
+
+                    List<string> smaliPath = [.. APKUtils
+                                                .GetSmaliPaths()
+                                                .Where(
+                                                    f => f.Contains(partialPath)
+                                                )
+                                            ];
+                    if (smaliPath.Count.Equals(0))
+                    {
+                        $"\nError: {partialPath} file not found".QuitWithException();
+                    }
+
                     ProxiedPath =
-                        uDropUtils.GetOSSpecificFullPath(partialPath).GetSmaliFileFullPath();
+                        partialPath.GetSmaliFileFullPath();
                     ProxiedLines =
                         [.. File.ReadAllLines(ProxiedPath)];
                     ProxiedLinesCount =
@@ -171,6 +194,7 @@ namespace uDrop.Code
                     foreach (var injectionInfo in injectionsInfo)
                     {
                         string injectionTypeInfo = "";
+                        string newLineChar = "\n";
 
                         if (InjectionType.Equals(0))
                         {
@@ -182,7 +206,7 @@ namespace uDrop.Code
                         }
                         else if (InjectionType.Equals(1))
                         {
-                            xmlSmaliProperties.Lines[injectionInfo.Item2] = injectionInfo.Item3[0];
+                            xmlSmaliProperties.Lines[injectionInfo.Item2] = String.Join(newLineChar, injectionInfo.Item3);
 
                             injectionTypeInfo = $"Replaced Line: {injectionInfo.Item2}";
                         }
@@ -196,7 +220,7 @@ namespace uDrop.Code
                         }
                         else if (InjectionType.Equals(3))
                         {
-                            xmlSmaliProperties.ProxiedLines[injectionInfo.Item2] = injectionInfo.Item3[0];
+                            xmlSmaliProperties.ProxiedLines[injectionInfo.Item2] = String.Join(newLineChar, injectionInfo.Item3);
 
                             injectionTypeInfo = $"Replaced Line: {injectionInfo.Item2}";
                         }
@@ -257,37 +281,18 @@ namespace uDrop.Code
                 innerPathOrFileName += smaliExtension;
             }
 
-            List<string> smaliPath = [];
-            int tryIndex = 0;
-            while (smaliPath.Count.Equals(0) && tryIndex < 3)
-            {
-                switch (tryIndex)
-                {
-                    case 0:
-                        smaliPath = [..
-                                        GetSmaliFolders()
-                                        .Where(
-                                            f => File.Exists(uDropUtils.GetOSSpecificFullPath($"{f}/{innerPathOrFileName}"))
-                                        )
-                                    ];
-                        break;
-                    case 1:
-                        smaliPath = [.. APKUtils
+            List<string> smaliPath = [.. APKUtils
                                         .GetSmaliPaths()
                                         .Where(
-                                            f => f.Contains(uDropUtils.GetOSSpecificFullPath($"/{innerPathOrFileName}"))
+                                            f => f.Contains(innerPathOrFileName)
                                         )
                                     ];
-                        break;
-                    case 2:
-                        $"\nError: {innerPathOrFileName} file not found".QuitWithException();
-                        break;
-                }
-
-                tryIndex++;
+            if (smaliPath.Count.Equals(0))
+            {
+                $"\nError: {innerPathOrFileName} file not found".QuitWithException();
             }
 
-            return uDropUtils.GetOSSpecificFullPath($"{smaliPath.First()}/{innerPathOrFileName}");
+            return smaliPath.First();
         }
 
         public static string GetSmaliFilePartialPath(this string fullPath)
@@ -498,20 +503,25 @@ namespace uDrop.Code
                         "X";
         }
 
-        public static bool MethodParametersCount(this string value, int targetParametersCount)
+        public static int GetMethodParametersCount(this string value)
         {
             try
             {
-                int sourceParametersCount = value.Split('(', ')')[1].Split(';').Length - 1;
-
-                return sourceParametersCount == targetParametersCount;
+                return value.Split('(', ')')[1].Split(';').Length - 1;
             }
             catch
             {
                 "\nError: No parameters found".QuitWithException();
             }
 
-            return false;
+            return -1;
+        }
+
+        public static int GetOccurrenceCount(this string source, string target)
+        {
+            return source
+                    .Split(['\n', '\r'], StringSplitOptions.RemoveEmptyEntries)
+                    .Count(linea => linea.Contains(target));
         }
 
         public static string GetRegister(this string value, int index)
@@ -581,29 +591,6 @@ namespace uDrop.Code
                     foundRegisters[fixedIndex]
                     :
                     "X";
-        }
-
-        public static string GetIstructionByRegisterSize(this string value, string low, string wide)
-        {
-            string currentRegisterValueString = "";
-            try
-            {
-                Regex.Matches(value, @"\d+")
-                    .Cast<Match>()
-                    .Select(match => match.Value)
-                    .ToList()
-                    .ForEach(number => currentRegisterValueString += number);
-            }
-            catch
-            {
-                ("\nError: This string doesn't contain any integer value\n" +
-                "\nPress any key to close the patcher.")
-                    .QuitWithException();
-            }
-
-            int currentRegisterValue = !String.IsNullOrEmpty(currentRegisterValueString) ? int.Parse(currentRegisterValueString) : 0;
-
-            return currentRegisterValue <= 15 ? low : wide;
         }
 
         public static string GetInvokedSectionClass(this string value, int index)
