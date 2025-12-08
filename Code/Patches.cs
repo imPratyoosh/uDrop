@@ -2067,8 +2067,8 @@
             return [
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
-                        SmaliUtils.GetResourceHex("layout", "compact_link"),
-                        SmaliUtils.GetResourceHex("id", "secondary_icon"),
+                        SmaliUtils.GetResourceHex("layout", "compact_list_item"),
+                        SmaliUtils.GetResourceHex("drawable", "bg_video_thumb_rounded"),
                         ".method"
                     ],
 
@@ -2127,8 +2127,8 @@
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
-                        SmaliUtils.GetResourceHex("layout", "compact_link"),
-                        ".method protected final bridge synthetic (Ljava/lang/Object;)[B",
+                        SmaliUtils.GetResourceHex("layout", "compact_list_item"),
+                        "\"com.google.android.libraries.youtube.rendering.presenter.PresentContext\"",
                         ".method public final ;)V"
                     ],
 
@@ -2152,7 +2152,7 @@
                             {
                                 if (xmlSmaliProperties.Lines[i].PartialContains(targetSearchTerms[1]))
                                 {
-                                    for (int j = i; j <= scaleIndex.Lines(i, 42); j++)
+                                    for (int j = i; j <= scaleIndex.Lines(i, 17); j++)
                                     {
                                         if (xmlSmaliProperties.Lines[j].PartialContains(targetSearchTerms[2]))
                                         {
@@ -8460,14 +8460,18 @@ new SmaliUtils.SubPatchModule<string[]>(
                 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
-                        SmaliUtils.GetResourceHex("layout", "compact_link"),
-                        "and-int 0x800",
-                        "invoke-static (Landroid/widget/TextView;Ljava/lang/CharSequence;)V",
-                        "invoke-virtual Lcom/google/android/apps/youtube/app/common/widget/TintableImageView;->setImageDrawable(Landroid/graphics/drawable/Drawable;)V",
-                        "invoke-static (I)L",
+                        SmaliUtils.GetResourceHex("layout", "compact_list_item"),
+                        SmaliUtils.GetResourceHex("id", "image_view"),
+                        "check-cast Lcom/google/android/apps/youtube/app/common/widget/TintableImageView;",
+                        "invoke-static",
                         "iget :I",
-                        "sget-object",
-                        "iget-object"
+                        "invoke-static",
+                        "invoke-virtual Lcom/google/android/libraries/youtube/common/ui/CircularImageView;->setVisibility(I)V",
+                        "invoke-static (I)I",
+                        "invoke-virtual Landroid/widget/TextView;->setVisibility(I)V",
+                        "iget-object",
+                        SmaliUtils.GetResourceHex("attr", "ytCallToAction"),
+                        "invoke-virtual Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V"
                     ],
 
                     true,
@@ -8490,60 +8494,77 @@ new SmaliUtils.SubPatchModule<string[]>(
                             {
                                 if (xmlSmaliProperties.Lines[i].PartialContains(targetSearchTerms[1]))
                                 {
-                                    for (int j = i; j >= scaleIndex.Lines(i, -10); j--)
+                                    for (int j = i; j <= scaleIndex.Lines(i, 112); j++)
                                     {
                                         if (xmlSmaliProperties.Lines[j].PartialContains(targetSearchTerms[2]))
                                         {
-                                            string enumNameFreeRegister = xmlSmaliProperties.Lines[j].GetRegister(2);
-
-                                            for (int k = j; k <= scaleIndex.Lines(j, 468); k++)
+                                            for (int k = j; k <= scaleIndex.Lines(j, 15); k++)
                                             {
                                                 if (xmlSmaliProperties.Lines[k].PartialContains(targetSearchTerms[3]))
                                                 {
-                                                    for (int l = k; l >= scaleIndex.Lines(k, -79); l--)
+                                                    for (int l = k; l <= scaleIndex.Lines(k, 9); l++)
                                                     {
                                                         if (xmlSmaliProperties.Lines[l].PartialContains(targetSearchTerms[4]))
                                                         {
-                                                            string enumObject = xmlSmaliProperties.Lines[l].GetInvokedSection();
-
-                                                            for (int m = l; m >= scaleIndex.Lines(l, -5); m--)
+                                                            for (int m = l; m <= scaleIndex.Lines(l, 5); m++)
                                                             {
                                                                 if (xmlSmaliProperties.Lines[m].PartialContains(targetSearchTerms[5]))
                                                                 {
-                                                                    string enumIndexObject = xmlSmaliProperties.Lines[m].GetInvokedSection();
-
-                                                                    for (int n = m; n >= scaleIndex.Lines(m, -6); n--)
+                                                                    for (int n = m; n >= scaleIndex.Lines(m, -321); n--)
                                                                     {
                                                                         if (xmlSmaliProperties.Lines[n].PartialContains(targetSearchTerms[6]))
                                                                         {
-                                                                            string enumEmptyObject = xmlSmaliProperties.Lines[n].GetInvokedSection();
-
-                                                                            for (int o = n; o >= scaleIndex.Lines(n, -9); o--)
+                                                                            for (int o = n; o >= scaleIndex.Lines(n, -29); o--)
                                                                             {
                                                                                 if (xmlSmaliProperties.Lines[o].PartialContains(targetSearchTerms[7]))
                                                                                 {
-                                                                                    string enumClassObject = xmlSmaliProperties.Lines[o].GetInvokedSection();
+                                                                                    for (int p = o; p >= scaleIndex.Lines(o, -37); p--)
+                                                                                    {
+                                                                                        if (xmlSmaliProperties.Lines[p].PartialContains(targetSearchTerms[8]))
+                                                                                        {
+                                                                                            for (int q = p; q <= scaleIndex.Lines(p, 7); q++)
+                                                                                            {
+                                                                                                if (xmlSmaliProperties.Lines[q].PartialContains(targetSearchTerms[9]))
+                                                                                                {
+                                                                                                    for (int r = q; r >= 0; r--)
+                                                                                                    {
+                                                                                                        if (xmlSmaliProperties.Lines[r].PartialContains(targetSearchTerms[10]))
+                                                                                                        {
+                                                                                                            for (int s = r; s <= scaleIndex.Lines(r, 28); s++)
+                                                                                                            {
+                                                                                                                if (xmlSmaliProperties.Lines[s].PartialContains(targetSearchTerms[11]))
+                                                                                                                {
+                                                                                                                    string enumNameRegister = xmlSmaliProperties.Lines[s].GetRegister(2);
 
-                                                                                    codeInject.Lines(
-                                                                                        [
-                                                                                            ("",
+                                                                                                                    codeInject.Lines(
+                                                                                                                        [
+                                                                                                                            ("",
 
-                                                                                            j + 1,
+                                                                                                                            s + 1,
 
-                                                                                            [
-                                                                                                $"iget-object {enumNameFreeRegister}, p2, {enumClassObject}",
-                                                                                                $"if-nez {enumNameFreeRegister}, :enum_check_null",
-                                                                                                $"sget-object {enumNameFreeRegister}, {enumEmptyObject}",
-                                                                                                ":enum_check_null",
-                                                                                                $"iget {enumNameFreeRegister}, {enumNameFreeRegister}, {enumIndexObject}",
-                                                                                                $"invoke-static {{{enumNameFreeRegister}}}, {enumObject}",
-                                                                                                $"move-result-object {enumNameFreeRegister}",
-                                                                                                $"invoke-static {{{xmlSmaliProperties.Lines[j].GetRegister(1)}, {enumNameFreeRegister}}}, L{uBlockerPath};->HideTabMeAccountButton(Landroid/view/View;Ljava/lang/Enum;)V"
-                                                                                            ])
-                                                                                        ]
-                                                                                    ).Write();
+                                                                                                                            [
+                                                                                                                                $"move-object/from16 {enumNameRegister}, p2",
+                                                                                                                                $"check-cast {enumNameRegister}, L{xmlSmaliProperties.Lines[q].GetInvokedSectionClass(1)};",
+                                                                                                                                $"iget-object {enumNameRegister}, {enumNameRegister}, {xmlSmaliProperties.Lines[q].GetInvokedSection()}",
+                                                                                                                                $"invoke-static {{{enumNameRegister}}}, {xmlSmaliProperties.Lines[k].GetInvokedSection()}",
+                                                                                                                                $"move-result-object {enumNameRegister}",
+                                                                                                                                $"iget {enumNameRegister}, {enumNameRegister}, {xmlSmaliProperties.Lines[l].GetInvokedSection()}",
+                                                                                                                                $"invoke-static {{{enumNameRegister}}}, {xmlSmaliProperties.Lines[m].GetInvokedSection()}",
+                                                                                                                                $"move-result-object {enumNameRegister}",
+                                                                                                                                $"invoke-static {{{xmlSmaliProperties.Lines[s].GetRegister(1)}, {enumNameRegister}}}, L{uBlockerPath};->HideTabMeAccountButton(Landroid/view/View;Ljava/lang/Enum;)V"
+                                                                                                                            ])
+                                                                                                                        ]
+                                                                                                                    ).Write();
 
-                                                                                    return (interactionsCount, false, infoForNextSubPatch);
+                                                                                                                    return (interactionsCount, false, infoForNextSubPatch);
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
                                                                                 }
                                                                             }
                                                                         }

@@ -610,7 +610,7 @@ public class uBlocker {
     );
     public static void HideTabMeAccountButton(View button, Enum<?> buttonName) {
         try {
-            if ((button.getParent().getParent() instanceof ViewGroup viewGroup)) {
+            if ((button.getParent().getParent().getParent() instanceof ViewGroup viewGroup)) {
                 for (String hiddenTabMeAccountButton : hiddenTabMeAccountButtons) {
                     if (buttonName.name().equals(hiddenTabMeAccountButton)) {
                         if (viewGroup.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
