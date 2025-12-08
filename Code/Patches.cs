@@ -2287,7 +2287,8 @@
 
                 new SmaliUtils.SubPatchModule<string[]>(
                     [
-                        ".method public final onBackPressed()V"
+                        "\"This input is not added to any dispatcher.\"",
+                        ".method public final onBackStarted(Landroid/window/BackEvent;)V"
                     ],
 
                     true,
@@ -2300,13 +2301,15 @@
                         interactionsCount,
                         infoForNextSubPatch
                     ) => {
-                        if (xmlSmaliProperties.Path.EndsWith(uDropUtils.GetOSSpecificFullPath("/watchwhile/MainActivity.smali")))
+                        if (new[] {
+                                targetSearchTerms[0]
+                            }.All(xmlSmaliProperties.Full.PartialContains))
                         {
                             xmlSmaliProperties.ReadXMLSmaliLines();
 
                             for (int i = 0; i < xmlSmaliProperties.LinesCount; i++)
                             {
-                                if (xmlSmaliProperties.Lines[i].PartialContains(targetSearchTerms[0]))
+                                if (xmlSmaliProperties.Lines[i].PartialContains(targetSearchTerms[1]))
                                 {
                                     codeInject.Lines(
                                         [
