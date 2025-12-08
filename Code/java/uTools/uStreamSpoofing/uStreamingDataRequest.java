@@ -65,8 +65,11 @@ public class uStreamingDataRequest {
     private byte[] requestBody;
     private boolean videoRequireLogin;
     private boolean videoRequireSimplifiedLocale;
+    private boolean videoReloadHandlerAlreadyInQueue = false;
     private uStreamingDataRequest(String videoID, Map<String, String> playerHeaders) {
         Objects.requireNonNull(playerHeaders);
+
+        videoReloadHandlerAlreadyInQueue = false;
 
         try {
             defaultAudioTrackLocales.clear();
@@ -239,7 +242,6 @@ public class uStreamingDataRequest {
                                             Log.d(GetClassName(), currentClientName);
 
                                             videoIDPlaying = videoID;
-
                                             VideoReload();
 
                                             return ByteBuffer.wrap(bAOS.toByteArray());
@@ -303,6 +305,11 @@ public class uStreamingDataRequest {
     private static final uUtils.MakeToast videoReloadingToast =
         new uUtils.MakeToast("Timeout: Reloading video...");
     private void VideoReload() {
+        if (videoReloadHandlerAlreadyInQueue) {
+            return;
+        }
+        videoReloadHandlerAlreadyInQueue = true;
+
         videoIDToReload = videoIDPlaying;
 
         Handler videoReloadHandler = new Handler(Looper.getMainLooper());
