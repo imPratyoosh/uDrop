@@ -57,11 +57,11 @@ public class uStreamingDataRequest {
             Arrays.asList(
                 uClientType.ANDROID_VR,
 
-                uClientType.ANDROID_CREATOR,
-
                 uClientType.IPADOS,
 
-                uClientType.VISIONOS
+                uClientType.VISIONOS,
+
+                uClientType.ANDROID_CREATOR
             )
         );
     private String currentClientName;
