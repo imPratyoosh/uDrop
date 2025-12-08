@@ -8545,13 +8545,17 @@ new SmaliUtils.SubPatchModule<string[]>(
                                                                                                                             [
                                                                                                                                 $"move-object/from16 {enumNameRegister}, p2",
                                                                                                                                 $"check-cast {enumNameRegister}, L{xmlSmaliProperties.Lines[q].GetInvokedSectionClass(1)};",
+                                                                                                                                $"if-eqz {enumNameRegister}, :check_first_enum_obj_null",
                                                                                                                                 $"iget-object {enumNameRegister}, {enumNameRegister}, {xmlSmaliProperties.Lines[q].GetInvokedSection()}",
                                                                                                                                 $"invoke-static {{{enumNameRegister}}}, {xmlSmaliProperties.Lines[k].GetInvokedSection()}",
                                                                                                                                 $"move-result-object {enumNameRegister}",
                                                                                                                                 $"iget {enumNameRegister}, {enumNameRegister}, {xmlSmaliProperties.Lines[l].GetInvokedSection()}",
                                                                                                                                 $"invoke-static {{{enumNameRegister}}}, {xmlSmaliProperties.Lines[m].GetInvokedSection()}",
                                                                                                                                 $"move-result-object {enumNameRegister}",
-                                                                                                                                $"invoke-static {{{xmlSmaliProperties.Lines[s].GetRegister(1)}, {enumNameRegister}}}, L{uBlockerPath};->HideTabMeAccountButton(Landroid/view/View;Ljava/lang/Enum;)V"
+                                                                                                                                $"if-eqz {enumNameRegister}, :check_second_enum_obj_null",
+                                                                                                                                $"invoke-static {{{xmlSmaliProperties.Lines[s].GetRegister(1)}, {enumNameRegister}}}, L{uBlockerPath};->HideTabMeAccountButton(Landroid/view/View;Ljava/lang/Enum;)V",
+                                                                                                                                ":check_second_enum_obj_null",
+                                                                                                                                ":check_first_enum_obj_null"
                                                                                                                             ])
                                                                                                                         ]
                                                                                                                     ).Write();
