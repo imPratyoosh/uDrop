@@ -8,6 +8,7 @@ import static uTools.uStreamSpoofing.uPlayerRoutes.requestKeys;
 import static uTools.uUtils.BackgroundThreadPool;
 import static uTools.uUtils.GetPlayerType;
 import static uTools.uUtils.GetVideoPlaybackStatus;
+import static uTools.uUtils.InitializeNewBlockList;
 import static uTools.uUtils.InitializeStreamCache;
 import static uTools.uUtils.SearchInSetCorasick;
 import static uTools.uUtils.SetRemoteActionButtonsList;
@@ -18,6 +19,8 @@ import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.hankcs.algorithm.AhoCorasickDoubleArrayTrie;
+
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
@@ -26,6 +29,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -33,6 +37,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
@@ -304,6 +309,17 @@ public class uStreamingDataRequest {
 
     private static final uUtils.MakeToast videoReloadingToast =
         new uUtils.MakeToast("Timeout: Reloading video...");
+    private static final AbstractMap.SimpleEntry<AhoCorasickDoubleArrayTrie<String>, Integer> videoReloadExcludedPlaybackStates =
+        InitializeNewBlockList(
+            new AbstractMap.SimpleEntry<> (
+                Set.of(
+                    "READY",
+                    "VIDEO_PLAYING"
+                ),
+
+                "videoReloadExcludedPlaybackStates"
+            )
+        );
     private void VideoReload() {
         if (videoReloadHandlerAlreadyInQueue) {
             return;
@@ -322,7 +338,11 @@ public class uStreamingDataRequest {
                 public void run() {
                     if (Objects.equals(videoIDToReload, videoIDPlaying)
                             &&
-                        !Objects.requireNonNull(GetVideoPlaybackStatus()).name().equals("VIDEO_PLAYING")
+                        !SearchInSetCorasick(
+                            Objects.requireNonNull(GetVideoPlaybackStatus()).name(),
+                            videoReloadExcludedPlaybackStates,
+                            uUtils.Entries.ANY
+                        )
                     ) {
                         if (msTimeCounter >= 7000) {
                             if (SearchInSetCorasick(
