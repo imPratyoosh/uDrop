@@ -9,7 +9,7 @@ public enum uVideoDetailsClients {
         "defaultAudioTrackID,actionButtons",
         "35",
         3,
-        "com.google.android.apps.youtube",
+        "com.google.android.youtube",
         GetAppVersion(),
         "132.0.6779.0",
         "Pixel 9 Pro Fold",

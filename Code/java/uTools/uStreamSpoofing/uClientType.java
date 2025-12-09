@@ -5,17 +5,30 @@ package uTools.uStreamSpoofing;
 import java.util.Objects;
 
 public enum uClientType {
+    ANDROID(
+        null,
+        3,
+        "com.google.android.youtube",
+        "20.05.46",
+        "",
+        "",
+        "",
+        "",
+        "Android",
+        " 16;",
+        null
+    ),
     ANDROID_CREATOR(
         "35",
         14,
         "com.google.android.apps.youtube.creator",
         "23.47.101",
-        "132.0.6779.0",
+        " Cronet/132.0.6779.0;",
         "Pixel 9 Pro Fold",
-        "Google",
-        "AP3A.241005.015.A2",
+        " Google;",
+        " Build/AP3A.241005.015.A2;",
         "Android",
-        "15",
+        " 15;",
         null
     ),
     ANDROID_VR(
@@ -23,26 +36,13 @@ public enum uClientType {
         28,
         "com.google.android.apps.youtube.vr.oculus",
         "1.47.48",
-        "113.0.5672.24",
+        " Cronet/113.0.5672.24;",
         "Quest 3",
-        "Oculus",
-        "QQ3A.200805.001",
+        " Oculus;",
+        " Build/QQ3A.200805.001;",
         "Android",
-        "10",
+        " 10;",
         null
-    ),
-    IPADOS(
-        null,
-        5,
-        null,
-        "19.22.3",
-        null,
-        "iPad7,6",
-        "Apple",
-        null,
-        "iPadOS",
-        "17.7.10.21H450",
-        "com.google.ios.youtube/19.22.3 (iPad7,6; U; CPU iPadOS 17_7_10 like Mac OS X)"
     ),
     VISIONOS(
         null,
@@ -76,10 +76,10 @@ public enum uClientType {
         this.osVersion = osVersion;
 
         if (userAgent == null) {
-            if (Objects.equals(deviceMake, "Google")) {
+            if (Objects.equals(osName, "Android")) {
                 this.userAgent =
                     String.format(
-                        "%s/%s (Linux; U; Android %s; %s; Build/%s; Cronet/%s)",
+                        "%s/%s (Linux; U; Android%s%s%s%s) gzip",
 
                         clientPackageName,
                         clientVersion,

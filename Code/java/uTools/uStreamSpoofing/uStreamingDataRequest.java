@@ -57,7 +57,7 @@ public class uStreamingDataRequest {
             Arrays.asList(
                 uClientType.ANDROID_VR,
 
-                uClientType.IPADOS,
+                uClientType.ANDROID,
 
                 uClientType.VISIONOS,
 
