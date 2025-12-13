@@ -2129,6 +2129,7 @@
                     [
                         SmaliUtils.GetResourceHex("layout", "compact_list_item"),
                         "\"com.google.android.libraries.youtube.rendering.presenter.PresentContext\"",
+                        SmaliUtils.GetResourceHex("attr", "ytTextSecondary"),
                         ".method public final ;)V"
                     ],
 
@@ -2143,7 +2144,8 @@
                         infoForNextSubPatch
                     ) => {
                         if (new[] {
-                                targetSearchTerms[0]
+                                targetSearchTerms[0],
+                                targetSearchTerms[1]
                             }.All(xmlSmaliProperties.Full.PartialContains))
                         {
                             xmlSmaliProperties.ReadXMLSmaliLines();
@@ -2152,29 +2154,35 @@
                             {
                                 if (xmlSmaliProperties.Lines[i].PartialContains(targetSearchTerms[1]))
                                 {
-                                    for (int j = i; j <= scaleIndex.Lines(i, 17); j++)
+                                    for (int j = i; j < xmlSmaliProperties.LinesCount; j++)
                                     {
                                         if (xmlSmaliProperties.Lines[j].PartialContains(targetSearchTerms[2]))
                                         {
-                                            codeInject.Lines(
-                                                [
-                                                    ("",
+                                            for (int k = j; k >= 0; k--)
+                                            {
+                                                if (xmlSmaliProperties.Lines[k].PartialContains(targetSearchTerms[3]))
+                                                {
+                                                    codeInject.Lines(
+                                                        [
+                                                            ("",
 
-                                                    j + 2,
+                                                            k + 2,
 
-                                                    [
-                                                        $"invoke-static {{}}, L{uUtilsPath};->GetNavigationBarActionDown()Z",
-                                                        "move-result v0",
-                                                        "if-eqz v0, :account_tab_visibility_no",
-                                                        "const/16 v0, 0x0",
-                                                        $"invoke-static {{v0}}, L{uUtilsPath};->SetAccountTabOpen(Z)V",
-                                                        $"invoke-static {{v0}}, L{uUtilsPath};->SetNavigationBarActionDown(Z)V",
-                                                        ":account_tab_visibility_no"
-                                                    ])
-                                                ]
-                                            ).Write();
+                                                            [
+                                                                $"invoke-static {{}}, L{uUtilsPath};->GetNavigationBarActionDown()Z",
+                                                                "move-result v0",
+                                                                "if-eqz v0, :account_tab_visibility_no",
+                                                                "const/16 v0, 0x0",
+                                                                $"invoke-static {{v0}}, L{uUtilsPath};->SetAccountTabOpen(Z)V",
+                                                                $"invoke-static {{v0}}, L{uUtilsPath};->SetNavigationBarActionDown(Z)V",
+                                                                ":account_tab_visibility_no"
+                                                            ])
+                                                        ]
+                                                    ).Write();
 
-                                            return (interactionsCount, false, infoForNextSubPatch);
+                                                    return (interactionsCount, false, infoForNextSubPatch);
+                                                }
+                                            }
                                         }
                                     }
                                 }
